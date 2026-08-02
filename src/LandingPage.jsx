@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz9wIFVWb3qLoYbLhB41WcPw5sFeysgdF1bUJ1zcQzR0pHygeYacabKdTnPky9-GSTTew/exec";
+
 /* ─────────────────────────────────────────
    TOKENS
 ───────────────────────────────────────── */
@@ -654,7 +656,33 @@ export default function GLQualificacao() {
     if(id==="genero") goNext();
   }
 
-  function handleSubmit(data){ console.log("Lead GL:",{answers,...data}); goNext(); }
+  async function handleSubmit(data) {
+    const payload = {
+      nome:                data.nome,
+      whatsapp:            data.whats,
+      instagram:           data.insta,
+      comentario:          data.comentario || "",
+      genero:              answers.genero             || "",
+      objetivo:            answers.objetivo            || "",
+      historico:           answers.historico           || "",
+      rotina:              answers.rotina              || "",
+      comprometimento:     answers.comprometimento     || "",
+      perfil_suporte:      answers.perfil_suporte      || "",
+      perfil_investimento: answers.perfil_investimento || "",
+      perfil_momento:      answers.perfil_momento      || "",
+    };
+    try {
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+    } catch(err) {
+      console.error("Erro ao enviar lead:", err);
+    }
+    goNext();
+  }
 
   return (
     <>
