@@ -670,7 +670,11 @@ export default function GLQualificacao() {
       perfil_investimento: answers.perfil_investimento || "",
       perfil_momento:      answers.perfil_momento   || "",
     });
-    fetch(`${WEBHOOK_URL}?${params.toString()}`).catch(()=>{});
+    // JSONP — ignora CORS completamente
+    const script = document.createElement("script");
+    script.src = `${WEBHOOK_URL}?${params.toString()}&callback=glLeadSent`;
+    window.glLeadSent = () => { document.body.removeChild(script); };
+    document.body.appendChild(script);
     goNext();
   }
 
