@@ -490,12 +490,13 @@ function FormScreen({ screen, onSubmit, copy }) {
   const [nome,setNome]=useState("");
   const [whats,setWhats]=useState("");
   const [insta,setInsta]=useState("");
+  const [comentario,setComentario]=useState("");
   const [loading,setLoading]=useState(false);
   const valid=nome.trim().length>0&&whats.replace(/\D/g,"").length>=8;
 
   function submit(){
     if(!valid||loading)return;
-    onSubmit({nome,whats,insta});
+    onSubmit({nome,whats,insta,comentario});
   }
 
   return (
@@ -513,6 +514,28 @@ function FormScreen({ screen, onSubmit, copy }) {
           <Input label="Seu nome" value={nome} onChange={setNome} placeholder="Como prefere ser chamado(a)?" required/>
           <Input label="WhatsApp" value={whats} onChange={setWhats} placeholder="(00) 00000-0000" type="tel" required/>
           <Input label="Instagram" value={insta} onChange={setInsta} placeholder="@seuarroba"/>
+          <div>
+            <label style={{...TYPE.monoSM,fontSize:10,color:C.textMuted,letterSpacing:"1.5px",textTransform:"uppercase",display:"block",marginBottom:6}}>
+              Algo que queira nos contar? <span style={{fontStyle:"italic"}}>opcional</span>
+            </label>
+            <textarea
+              value={comentario}
+              onChange={e=>setComentario(e.target.value.slice(0,280))}
+              placeholder="Histórico, lesões, restrições, dúvidas..."
+              rows={3}
+              style={{
+                width:"100%",display:"block",
+                background:C.bg,
+                border:`1px solid ${C.border}`,
+                borderRadius:BR.lg,
+                padding:"12px 16px",
+                ...TYPE.body,fontSize:14,
+                color:C.text,outline:"none",
+                resize:"none",
+                fontFamily:"'Inter',sans-serif",
+              }}
+            />
+          </div>
         </div>
         <div className="anim-cta" style={{display:"flex",flexDirection:"column",gap:SP[12]}}>
           <BtnPrimary onClick={submit} disabled={!valid||loading} fullWidth>
