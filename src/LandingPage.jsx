@@ -491,12 +491,13 @@ function FormScreen({ screen, onSubmit, copy }) {
   const [whats,setWhats]=useState("");
   const [insta,setInsta]=useState("");
   const [loading,setLoading]=useState(false);
-  const valid=nome.trim().length>1&&whats.replace(/\D/g,"").length>=10;
+  const valid=nome.trim().length>0&&whats.replace(/\D/g,"").length>=8;
 
-  function submit(){
+  async function submit(){
     if(!valid||loading)return;
     setLoading(true);
-    setTimeout(()=>{setLoading(false);onSubmit({nome,whats,insta});},1100);
+    try { await onSubmit({nome,whats,insta}); } catch(e) {}
+    setLoading(false);
   }
 
   return (
@@ -679,7 +680,6 @@ export default function GLQualificacao() {
     } catch(err) {
       console.error("Erro ao enviar lead:", err);
     }
-    goNext();
   }
 
   return (
