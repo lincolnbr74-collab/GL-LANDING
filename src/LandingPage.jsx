@@ -656,26 +656,21 @@ export default function GLQualificacao() {
   }
 
   function handleSubmit(data) {
-    // Fire and forget — não bloqueia a navegação
-    try {
-      const params = new URLSearchParams({
-        nome:                data.nome               || "",
-        whatsapp:            data.whats              || "",
-        instagram:           data.insta              || "",
-        comentario:          data.comentario         || "",
-        genero:              answers.genero          || "",
-        objetivo:            answers.objetivo         || "",
-        historico:           answers.historico        || "",
-        rotina:              answers.rotina           || "",
-        comprometimento:     answers.comprometimento  || "",
-        perfil_suporte:      answers.perfil_suporte   || "",
-        perfil_investimento: answers.perfil_investimento || "",
-        perfil_momento:      answers.perfil_momento   || "",
-      });
-      new Image().src = `${WEBHOOK_URL}?${params.toString()}`;
-    } catch(err) {
-      console.error("Erro ao enviar lead:", err);
-    }
+    const params = new URLSearchParams({
+      nome:                data.nome               || "",
+      whatsapp:            data.whats              || "",
+      instagram:           data.insta              || "",
+      comentario:          data.comentario         || "",
+      genero:              answers.genero          || "",
+      objetivo:            answers.objetivo         || "",
+      historico:           answers.historico        || "",
+      rotina:              answers.rotina           || "",
+      comprometimento:     answers.comprometimento  || "",
+      perfil_suporte:      answers.perfil_suporte   || "",
+      perfil_investimento: answers.perfil_investimento || "",
+      perfil_momento:      answers.perfil_momento   || "",
+    });
+    fetch(`${WEBHOOK_URL}?${params.toString()}`).catch(()=>{});
     goNext();
   }
 
