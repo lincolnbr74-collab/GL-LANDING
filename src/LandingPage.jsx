@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbz9wIFVWb3qLoYbLhB41WcPw5sFeysgdF1bUJ1zcQzR0pHygeYacabKdTnPky9-GSTTew/exec";
+const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwj_pWkJpYjsGpSsdSMBlDCIPzFUIFrqrwCI-68NGL893hibZB0oyfE0lsZsmZuXT1gMg/exec";
 
 /* ─────────────────────────────────────────
    TOKENS
@@ -657,26 +657,24 @@ export default function GLQualificacao() {
   }
 
   async function handleSubmit(data) {
-    const payload = {
-      nome:                data.nome,
-      whatsapp:            data.whats,
-      instagram:           data.insta,
-      comentario:          data.comentario || "",
-      genero:              answers.genero             || "",
-      objetivo:            answers.objetivo            || "",
-      historico:           answers.historico           || "",
-      rotina:              answers.rotina              || "",
-      comprometimento:     answers.comprometimento     || "",
-      perfil_suporte:      answers.perfil_suporte      || "",
-      perfil_investimento: answers.perfil_investimento || "",
-      perfil_momento:      answers.perfil_momento      || "",
-    };
     try {
-      await fetch(WEBHOOK_URL, {
-        method: "POST",
+      const params = new URLSearchParams({
+        nome:                data.nome               || "",
+        whatsapp:            data.whats              || "",
+        instagram:           data.insta              || "",
+        comentario:          data.comentario         || "",
+        genero:              answers.genero          || "",
+        objetivo:            answers.objetivo         || "",
+        historico:           answers.historico        || "",
+        rotina:              answers.rotina           || "",
+        comprometimento:     answers.comprometimento  || "",
+        perfil_suporte:      answers.perfil_suporte   || "",
+        perfil_investimento: answers.perfil_investimento || "",
+        perfil_momento:      answers.perfil_momento   || "",
+      });
+      await fetch(`${WEBHOOK_URL}?${params.toString()}`, {
+        method: "GET",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
       });
     } catch(err) {
       console.error("Erro ao enviar lead:", err);
