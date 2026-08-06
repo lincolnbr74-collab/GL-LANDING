@@ -1,0 +1,16 @@
+# Nada desta pasta entra no git, e nada dela vai para o ar.
+#
+# Aqui ficam os ORIGINAIS: foto de aluno com nome de verdade no arquivo, foto
+# do nutri, o PDF do CRN. Duas razões para eles não passarem daqui:
+#
+# 1. `public/` É PÚBLICO. Tudo que está lá dentro é copiado para o build e
+#    servido na internet — mesmo o que a página não usa. Um arquivo chamado
+#    "FULANA 1.jpeg" numa pasta pública é o nome completo de uma aluna real
+#    colado numa foto de biquíni, ao alcance de quem souber o endereço.
+# 2. Histórico de git é permanente, e foto de celular carrega EXIF (modelo do
+#    aparelho, data, e muitas vezes a coordenada de GPS de onde foi tirada).
+#
+# O que vai para a página são os `.webp` gerados a partir daqui, com nome
+# neutro, em `public/prova/`. O cwebp descarta os metadados na conversão.
+*
+!.gitignore
