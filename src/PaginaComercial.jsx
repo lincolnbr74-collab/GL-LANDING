@@ -648,36 +648,36 @@ function Metodo() {
               </defs>
 
               <g clipPath="url(#glRecorteTela)">
-                <rect x="500" y="460" width="490" height="280" fill="url(#glTela)" />
-                <ellipse cx="742" cy="598" rx="260" ry="150" fill="url(#glBrilho)" />
-                {/* A LOGO DE VERDADE, anexada pelo GL em 06/08. Antes disto a
-                    tela trazia "GL" desenhado em Anton — servia, mas era a
-                    letra, não a marca.
+                {/* O PAPEL DE PAREDE DO GL (06/08). Ele mandou a arte 3D da
+                    marca e pediu: "coloca como se fosse o fundo da minha tela
+                    de trabalho, com a opacidade um pouco mais baixa para
+                    parecer que está na tela do computador".
 
-                    É a versão CLARA do símbolo, gerada a partir do original: no
-                    arquivo dele metade do símbolo é quase preta, e sobre a tela
-                    escura essa metade simplesmente sumia. Os pixels cinzentos
-                    viraram branco e o vermelho ficou intacto — o teste é a
-                    diferença entre os canais, então nada de vermelho foi
-                    tocado. O original continua em `public/marca/SIMBOOLO.png`. */}
+                    Substituiu o símbolo solto que estava aqui. É melhor por
+                    dois motivos: já traz o lockup inteiro (GABRIEL LINCOLN,
+                    TREINADOR), e um papel de parede é o que de fato aparece
+                    numa tela de trabalho — símbolo centralizado em fundo liso
+                    lê como tela de carregamento parada.
+
+                    Recortado de 2000x1200 para 1.767, que é a proporção medida
+                    da tela nesta foto: 34px fora em cima e embaixo, e a arte
+                    fica no eixo. Sem esticar nada.
+
+                    A OPACIDADE em 0.82, com um véu escuro por cima: tela de
+                    verdade nunca é tão saturada quanto o arquivo original, e o
+                    branco cheio brigaria com a foto clara do estúdio. */}
+                <rect x="500" y="460" width="490" height="280" fill="#08080a" />
                 <image
-                  href="/marca/gl-simbolo-claro.png"
-                  x="672" y="505" width="140" height="130"
-                  preserveAspectRatio="xMidYMid meet"
+                  href="/marca/gl-tela.webp"
+                  x="500" y="458" width="490" height="280"
+                  preserveAspectRatio="xMidYMid slice"
+                  opacity="0.82"
                 />
-                <text
-                  x="742" y="688"
-                  textAnchor="middle"
-                  fontFamily="'JetBrains Mono', monospace"
-                  fontSize="20"
-                  fill="#E10A1F"
-                  letterSpacing="7"
-                >
-                  CONSULTORIA
-                </text>
+                {/* Véu: assenta a arte na cena e tira o ar de imagem colada. */}
+                <rect x="500" y="460" width="490" height="280" fill="#08080a" opacity="0.18" />
                 {/* Filete de brilho no topo do vidro: é o que faz a tela parecer
                     ACESA em vez de um adesivo colado na foto. */}
-                <rect x="500" y="460" width="490" height="70" fill="#FFFFFF" opacity="0.03" />
+                <rect x="500" y="460" width="490" height="60" fill="#FFFFFF" opacity="0.05" />
               </g>
             </svg>
           </div>
