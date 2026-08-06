@@ -271,7 +271,7 @@ function Hero({ onComecar }) {
           {/* Diz o custo antes de pedir o clique: tempo e o que acontece
               depois. Ninguém entra em formulário sem saber onde vai dar. */}
           <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "1px" }}>
-            5 minutos · sem compromisso
+            Menos de 5 minutos · sem compromisso
           </span>
         </div>
       </div>
@@ -416,7 +416,7 @@ function Prova({ onComecar }) {
           Quero começar assim também →
         </button>
         <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "1px" }}>
-          5 minutos · sem compromisso
+          Menos de 5 minutos · sem compromisso
         </span>
       </div>
 
@@ -679,9 +679,16 @@ function Metodo() {
                 />
                 {/* Véu: assenta a arte na cena e tira o ar de imagem colada. */}
                 <rect x="500" y="460" width="490" height="280" fill="#08080a" opacity="0.18" />
-                {/* Filete de brilho no topo do vidro: é o que faz a tela parecer
-                    ACESA em vez de um adesivo colado na foto. */}
-                <rect x="500" y="460" width="490" height="60" fill="#FFFFFF" opacity="0.05" />
+                {/* O FILETE DE BRILHO NO TOPO SAIU (06/08). A ideia era simular
+                    o reflexo do vidro para a tela parecer acesa; na prática
+                    virou uma faixa clara com borda visível na altura do
+                    cabeçalho do papel de parede — o GL viu na hora: "a parte de
+                    cima está um pouquinho mais clara do que o restante".
+
+                    Reflexo de vidro real é gradiente, não bloco. Um retângulo
+                    de opacidade fixa sempre vai desenhar uma linha onde acaba.
+                    Como a tela já lê como acesa por causa do véu e do contraste
+                    com a moldura escura, o filete só tinha a perder. */}
               </g>
             </svg>
           </div>
@@ -860,8 +867,9 @@ function Entrada({ onComecar }) {
         <span style={{ color: C.red }}> UMA CONVERSA.</span>
       </h2>
       <p style={{ ...TYPE.lead, color: C.textRead, marginTop: SP[24] }}>
-        São cinco minutos de perguntas para eu entender a sua rotina, o seu
-        histórico e o que já não funcionou. Não é teste e não tem resposta certa.
+        São menos de cinco minutos de perguntas para eu entender a sua rotina,
+        o seu histórico e o que já não funcionou. Não é teste e não tem resposta
+        certa.
       </p>
       <p style={{ ...TYPE.lead, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
         Se eu não for o caminho certo pra você, eu te digo — e te aponto o que eu faria no seu lugar.

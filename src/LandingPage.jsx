@@ -51,7 +51,15 @@ const SCREENS = [
     // frase. Se um dia o GL quiser cortar duas perguntas, o número volta a 5
     // aqui e o TOTAL_STEPS acompanha.
     sub:"São 7 perguntas rápidas. Suas respostas definem se o acompanhamento da GL Team é o caminho certo pra você.",
-    cta:"Vamos lá", note:"Leva menos de 3 minutos",
+    cta:"Vamos lá",
+    // TEMPO UNIFICADO em 06/08, no diagnostico antes de publicar. Aqui dizia
+    // "menos de 3 minutos" e a pagina comercial dizia "5 minutos" em tres
+    // lugares. Nao era mentira — prometia mais do que gastava —, mas duas
+    // paginas do mesmo funil davam dois numeros para a mesma pergunta, e e
+    // exatamente esse tipo de desencontro que faz a pessoa desconfiar sem
+    // saber explicar por que. Agora e "menos de 5 minutos" nos quatro lugares:
+    // o numero maior, que e o unico que nao tem como quebrar promessa.
+    note:"Leva menos de 5 minutos",
   },
   { id:"genero", type:"gender",
     question:"Como você se identifica?",
