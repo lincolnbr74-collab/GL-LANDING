@@ -63,9 +63,13 @@ export const PARES = [
     // Isis — frente, costas e perfil da mesma avaliação, conferidas contra o
     // original em fontes-privadas.
     nome: "Isis",
-    chamada: "Já tinha emagrecido. Faltava perder o medo",
+    // REESCRITA em 06/08, a partir do relato que o GL ditou. Saiu a frase
+    // "chegou pensando em cirurgia estética": ela não aparece na versão dele, e
+    // no lugar dela ele falou em flacidez de pele. Detalhe que ninguém confere
+    // é justamente o que não pode estar errado numa página de prova.
+    chamada: "Já tinha emagrecido. Achava que teria que comer menos ainda",
     historia:
-      "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
+      "Foi obesa na adolescência e já tinha emagrecido quando me procurou. Queria condicionamento, firmeza de pele e músculo — mas chegou convencida de que o caminho era comer menos. Foi o contrário: comendo e treinando com acompanhamento, ela construiu o que a restrição não ia dar.",
     // Costas e perfil da MESMA avaliação. Ficam DENTRO do card de propósito:
     // numa faixa separada, o rótulo "a aluna acima" fica ambíguo com dois
     // cards em cima, e o leitor pode atribuir as fotos à pessoa errada.
@@ -91,8 +95,14 @@ export const PARES = [
     // Eduarda". Sem história ainda — card com foto e nome é honesto; frase
     // inventada sobre pessoa real, não.
     nome: "Maria Eduarda",
-    chamada: null,
-    historia: null,
+    // A HISTÓRIA VOLTOU PARA A DONA (06/08). Esta era a frase que estava no
+    // card da Hemanoelly, e a suspeita registrada lá — "a história pode ter
+    // sido contada sobre a Maria Eduarda e colada na foto errada junto com o
+    // nome" — estava certa: o GL mandou o relato de cada aluna com o nome na
+    // frente, e este é o dela.
+    chamada: "A rotina nunca deixava treinar",
+    historia:
+      "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
     // A FOTO DA PISCINA, pedida pelo GL em 06/08: "é a mesma aluna do topper
     // preto, gostaria que colocasse também". Fica DENTRO do card dela, pelo
     // mesmo motivo do segundo card: solta, seria lida como mais uma aluna.
@@ -127,23 +137,30 @@ export const PARES = [
     // O original não tem rosto: ela está de costas para a câmera nos dois
     // lados. Já foi recortada "por segurança" uma vez, e o corte comia metade
     // do corpo — desfeito em 06/08.
-    // A HISTÓRIA FICOU, mas o dono dela está em aberto: ela pode ter sido
-    // contada sobre a Maria Eduarda e colada na foto errada junto com o nome.
-    // Sem nome no card, ela não atribui nada a ninguém identificável — que é o
-    // estado seguro enquanto o GL não confirma.
-    chamada: "A rotina nunca deixava treinar",
+    //
+    // A HISTÓRIA QUE ESTAVA AQUI NÃO ERA DELA. Era a da Maria Eduarda ("a
+    // rotina nunca deixava treinar"), colada neste card junto com o nome
+    // errado. Em 06/08 o GL mandou o relato de cada aluna com o nome na
+    // frente e a troca apareceu. A dela é esta, e é outra história inteira.
+    //
+    // O MÊS é dele, não meu: "em apenas um mês tivemos essa evolução". É o
+    // único prazo da página — os outros cards continuam sem tempo porque ele
+    // não lembrava, e prazo inventado quebra tudo se for conferido.
+    chamada: "Já treinava pesado. Faltava saber o que era dela",
     historia:
-      "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
+      "Chegou avançada, com anos de treino e bastante massa muscular, mas seguindo o que servia para qualquer um — nunca o que o corpo dela pedia. Montei um protocolo direcionado para glúteo e posteriores de coxa. A diferença da foto é de um mês.",
   },
-  // Giovanna entra SEM história: o GL ainda não contou a dela. Card com foto e
-  // nome é honesto; frase inventada sobre pessoa real, não. O questionário de
-  // depoimento no cofre existe para preencher exatamente este vazio.
   {
     img: "/prova/aluna-lateral.webp",
     // Giovanna — conferida contra "GIOVANNA CAIRES 1.jpeg" em fontes-privadas.
     nome: "Giovanna",
-    chamada: null,
-    historia: null,
+    // História ditada pelo GL em 06/08. A chamada é o detalhe mais útil do
+    // relato dele: ela chegou querendo COMPRAR OUTRA COISA (uma ficha de
+    // treino) e recebeu acompanhamento. É a distância entre planilha e
+    // consultoria, contada por um caso em vez de por adjetivo.
+    chamada: "Chegou querendo só uma ficha de treino",
+    historia:
+      "Procurou a GL em março atrás de uma ficha, e saiu com treino e dieta montados para o caso dela: correção postural, posteriores de coxa e glúteo. Seguiu o protocolo sem sofrer na dieta — que é o que explica ela ter seguido até o fim.",
   },
 ];
 
