@@ -69,6 +69,27 @@ export const PARES = [
     ],
     notaAngulos: "Costas e perfil da mesma avaliação — é assim que se vê que não foi enquadramento favorável.",
   },
+  // As duas abaixo entram SEM história: o GL ainda não contou as delas. Card
+  // com foto e nome é honesto; frase inventada sobre pessoa real, não. Ficam
+  // lado a lado na segunda linha, então a assimetria fica ENTRE linhas e lê
+  // como intenção — "duas histórias, e mais estas duas".
+  {
+    img: "/prova/aluna-lateral.webp",
+    nome: "Aluna GL",
+    chamada: null,
+    historia: null,
+  },
+  {
+    img: "/prova/aluna-perfil.webp",
+    nome: "Aluna GL",
+    chamada: null,
+    historia: null,
+    // Proporção PRÓPRIA. O corte que tirou o rosto deixou a foto larga
+    // (1000x540); forçada em quadrado, o `cover` comia as laterais e
+    // destruía os dois lados da comparação. Antes e depois cortado ao meio
+    // não é prova de nada.
+    proporcao: "50 / 27",
+  },
 ];
 
 /**
@@ -84,17 +105,7 @@ export const PARES = [
  */
 
 
-/**
- * Uma aluna a mais, de quem o GL não contou a história.
- *
- * Fica em faixa PRÓPRIA, e não junto dos ângulos acima, porque juntar as duas
- * coisas faria três imagens parecerem três pessoas — quando duas são a mesma.
- * Enganar por arranjo é enganar.
- */
-export const OUTRA_ALUNA = {
-  img: "/prova/aluna-perfil.webp",
-  alt: "Antes e depois de outra aluna da GL Consultoria",
-};
+
 
 function Ticker() {
   const items = [
@@ -199,7 +210,7 @@ function Hero({ onComecar }) {
           que o cofre chama de "cara de IA". */}
       <div className="anim-sub gl-hero-foto">
         <img
-          src="/prova/gl-retrato.webp"
+          src="/prova/gl-frente.webp"
           alt="Gabriel Lincoln, treinador responsável pela consultoria"
           width={920}
           height={1150}
@@ -240,14 +251,15 @@ function Prova({ onComecar }) {
 
       <div className="gl-prova-grade" style={{ marginTop: SP[48] }}>
         {PARES.map((p) => (
-          <figure key={p.nome} style={{ margin: 0 }}>
+          <figure key={p.img} style={{ margin: 0, alignSelf: "start" }}>
             <img
               src={p.img}
               alt={`Antes e depois de ${p.nome}`}
               loading="lazy"
               style={{
-                width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
+                width: "100%", aspectRatio: p.proporcao || "1 / 1", objectFit: "cover",
                 display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
+                alignSelf: "start",
               }}
             />
             <figcaption style={{ marginTop: SP[16] }}>
@@ -292,22 +304,6 @@ function Prova({ onComecar }) {
             </figcaption>
           </figure>
         ))}
-      </div>
-
-      {/* Faixa própria, com rótulo que diz que é OUTRA pessoa. */}
-      <div style={{ marginTop: SP[48] }}>
-        <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "2px", textTransform: "uppercase" }}>
-          Outra aluna
-        </span>
-        <img
-          src={OUTRA_ALUNA.img}
-          alt={OUTRA_ALUNA.alt}
-          loading="lazy"
-          style={{
-            width: "100%", maxWidth: 620, marginTop: SP[16], display: "block",
-            borderRadius: BR.md, border: `1px solid ${C.border}`,
-          }}
-        />
       </div>
 
       {/* CHAMADA NO PICO. A página tem ~5.300px e tinha só dois botões, topo e
@@ -441,7 +437,7 @@ function Metodo() {
             que continua depois da primeira semana.
           </p>
           <img
-            src="/prova/gl-frente.webp"
+            src="/prova/gl-retrato.webp"
             alt="Gabriel Lincoln, responsável pela GL Consultoria"
             loading="lazy"
             style={{
