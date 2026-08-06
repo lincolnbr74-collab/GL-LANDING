@@ -47,31 +47,22 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
  * é o tipo de número que ninguém confere e que quebra tudo se for descoberto.
  */
 export const PARES = [
-  {
-    img: "/prova/aluna-cortina.webp",
-    // NOME REMOVIDO em 06/08 — este card dizia "Maria Eduarda" e NÃO é ela.
-    // O GL apontou o quarto card e disse "essa é a Maria Eduarda"; conferido
-    // foto a foto, são quatro ensaios de quatro pessoas diferentes, e a desta
-    // aqui (biquíni verde e amarelo, fundo de cortina) não é a mesma do card
-    // que ele apontou. Nome de pessoa real em cima do corpo de outra pessoa
-    // real, numa página pública, não tem desfazer — então ele sai até o GL
-    // dizer de quem é a foto. O arquivo foi renomeado pelo mesmo motivo:
-    // `maria-eduarda.webp` afirmava a identidade errada no próprio nome.
-    nome: "Aluna GL",
-    // O original não tem rosto: ela está de costas para a câmera nos dois
-    // lados. Já foi recortada "por segurança" uma vez, e o corte comia metade
-    // do corpo — desfeito em 06/08.
-    // A HISTÓRIA FICOU, mas o dono dela está em aberto: ela pode ter sido
-    // contada sobre a Maria Eduarda e colada na foto errada junto com o nome.
-    // Sem nome no card, ela não atribui nada a ninguém identificável — que é o
-    // estado seguro enquanto o GL não confirma.
-    chamada: "A rotina nunca deixava treinar",
-    historia:
-      "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
-  },
+  // ORDEM PENSADA PARA A ALTURA, 06/08 — o GL: "tem um espaço ali para duas
+  // fotos, não pode ficar aquele vazio na landing page".
+  //
+  // Dois cards carregam fotos extras da mesma aluna e ficam mais altos. Antes
+  // eles estavam em linhas diferentes, cada um ao lado de um card curto, e
+  // sobrava um buraco em CADA linha. Agora os dois altos dividem a primeira
+  // linha e os dois curtos a segunda: a diferença de altura fica ENTRE as
+  // linhas, onde ninguém vê, em vez de ao lado, onde grita.
+  //
+  // De quebra, a página passa a abrir a prova pela Isis, que é a história
+  // mais completa que existe aqui — três ângulos da mesma avaliação.
   {
     img: "/prova/aluna-frente.webp",
-    nome: "Aluna GL",
+    // Isis — frente, costas e perfil da mesma avaliação, conferidas contra o
+    // original em fontes-privadas.
+    nome: "Isis",
     chamada: "Já tinha emagrecido. Faltava perder o medo",
     historia:
       "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
@@ -79,20 +70,10 @@ export const PARES = [
     // numa faixa separada, o rótulo "a aluna acima" fica ambíguo com dois
     // cards em cima, e o leitor pode atribuir as fotos à pessoa errada.
     angulos: [
-      { img: "/prova/aluna-costas.webp", alt: "A mesma aluna, vista de costas" },
-      { img: "/prova/aluna-lado.webp", alt: "A mesma aluna, vista de perfil" },
+      { img: "/prova/aluna-costas.webp", alt: "Isis, vista de costas" },
+      { img: "/prova/aluna-lado.webp", alt: "Isis, vista de perfil" },
     ],
     notaAngulos: "Costas e perfil da mesma avaliação — é assim que se vê que não foi enquadramento favorável.",
-  },
-  // As duas abaixo entram SEM história: o GL ainda não contou as delas. Card
-  // com foto e nome é honesto; frase inventada sobre pessoa real, não. Ficam
-  // lado a lado na segunda linha, então a assimetria fica ENTRE linhas e lê
-  // como intenção — "duas histórias, e mais estas duas".
-  {
-    img: "/prova/aluna-lateral.webp",
-    nome: "Aluna GL",
-    chamada: null,
-    historia: null,
   },
   {
     // FOTO REFEITA DO ORIGINAL em 06/08. O GL abriu a página e disse: "a foto
@@ -127,6 +108,42 @@ export const PARES = [
       },
     ],
     notaAngulos: "A mesma aluna, de frente — antes e depois da mesma jornada.",
+  },
+{
+    img: "/prova/aluna-cortina.webp",
+    // QUEM É: Hemanoelly. O GL identificou renomeando o arquivo de origem, e
+    // em 06/08 cobrou que o nome aparecesse ("as meninas que estão com nome
+    // ainda estão Aluna GL").
+    //
+    // Este card já levou o nome ERRADO uma vez — dizia "Maria Eduarda", que é
+    // outra pessoa, e o engano só apareceu porque o GL apontou a tela. Por
+    // isso a identificação passou a ser conferida foto a foto contra o
+    // original antes de qualquer nome entrar.
+    //
+    // SÓ O PRIMEIRO NOME, e isso vale para os quatro cards: sobrenome em cima
+    // de foto de biquíni identifica a pessoa para qualquer busca. O primeiro
+    // nome dá autoria à história sem entregar a mulher.
+    nome: "Hemanoelly",
+    // O original não tem rosto: ela está de costas para a câmera nos dois
+    // lados. Já foi recortada "por segurança" uma vez, e o corte comia metade
+    // do corpo — desfeito em 06/08.
+    // A HISTÓRIA FICOU, mas o dono dela está em aberto: ela pode ter sido
+    // contada sobre a Maria Eduarda e colada na foto errada junto com o nome.
+    // Sem nome no card, ela não atribui nada a ninguém identificável — que é o
+    // estado seguro enquanto o GL não confirma.
+    chamada: "A rotina nunca deixava treinar",
+    historia:
+      "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
+  },
+  // Giovanna entra SEM história: o GL ainda não contou a dela. Card com foto e
+  // nome é honesto; frase inventada sobre pessoa real, não. O questionário de
+  // depoimento no cofre existe para preencher exatamente este vazio.
+  {
+    img: "/prova/aluna-lateral.webp",
+    // Giovanna — conferida contra "GIOVANNA CAIRES 1.jpeg" em fontes-privadas.
+    nome: "Giovanna",
+    chamada: null,
+    historia: null,
   },
 ];
 

@@ -184,9 +184,36 @@ export const CSS_COMERCIAL = `
     width: auto; height: auto;
     display: block;
   }
-  /* Cada card é uma coluna com a legenda começando logo abaixo da caixa. Como
-     as caixas têm a MESMA altura, os nomes saem na mesma linha. */
-  .gl-prova-card { display: flex; flex-direction: column; }
+  /* CARD COM MOLDURA (06/08) — da queixa do GL: "tem um espaço ali para duas
+     fotos, nao pode ficar aquele vazio na landing page".
+
+     O vazio era real e tinha causa: o segundo e o quarto card carregam fotos
+     extras da MESMA aluna dentro deles, entao ficam mais altos que os
+     vizinhos. Solto no preto, o que sobra do lado nao le como "o card ao lado
+     tem mais coisa" — le como buraco, como se algo tivesse falhado ao
+     carregar.
+
+     Nao ha fotos extras das outras duas para preencher (conferido nos
+     originais), entao a saida nao e material novo, e moldura: dentro de um
+     card com fundo e borda, altura diferente vira "esse tem mais conteudo",
+     que e a leitura certa. E o mesmo formato de depoimento que o GL mandou
+     como referencia.
+
+     Estica na grade e altura cheia aqui: os dois cards da linha terminam
+     juntos, entao a borda de baixo fecha alinhada.
+     (Sem crase: comentario dentro de template literal — crase encerra a
+     string e derruba o build. Segunda vez em 06/08.) */
+  .gl-prova-card {
+    display: flex; flex-direction: column; height: 100%;
+    background: #111111;
+    border: 1px solid #1E1E1E;
+    border-radius: 20px;
+    padding: 14px 14px 22px;
+  }
+  .gl-prova-grade { align-items: stretch; }
+  /* Dentro do card, a caixa da foto nao precisa de borda propria: duas bordas
+     encostadas viram sujeira. */
+  .gl-prova-card .gl-foto-caixa { border-color: transparent; background: #0A0A0A; }
 
   /* Faixa de resultados: menor que os cards com história, de propósito — o
      peso visual segue a hierarquia do conteúdo. */
