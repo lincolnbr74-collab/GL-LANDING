@@ -115,4 +115,16 @@ export const CSS_COMERCIAL = `
   @media (max-width: 900px) {
     .gl-prova-grade { grid-template-columns: 1fr; gap: 40px; }
   }
+  /* Faixa de resultados: menor que os cards com história, de propósito — o
+     peso visual segue a hierarquia do conteúdo. */
+  .gl-prova-faixa { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 640px) {
+    .gl-prova-faixa { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  .gl-dores { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gl-metodo { display: grid; gap: 48px; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; }
+  .gl-quem { display: grid; gap: 48px; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; }
+  @media (max-width: 900px) {
+    .gl-dores, .gl-metodo, .gl-quem { grid-template-columns: 1fr; gap: 32px; }
+  }
 `;

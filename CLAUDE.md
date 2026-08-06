@@ -82,94 +82,62 @@ convida. **Nenhum texto pode sugerir que a pessoa precisa provar que merece.**
 
 ## Current Checkpoint
 
-> **Sessão reiniciada? Leia só esta seção.** Ela é o estado exato de 06/08/2026.
+> **Sessão reiniciada? Leia só esta seção.** Estado de 06/08/2026, fim do dia.
 
-### Como retomar em 30 segundos
+### Como retomar
 
 ```bash
 cd /Users/gabriellincoln/Desktop/GL-LANDING
-git branch --show-current      # tem de dizer: pagina-comercial
+git branch --show-current      # pagina-comercial
 PORT=3100 BROWSER=none npm start
-# abre http://localhost:3100  → deve aparecer a página comercial, não o quiz
 ```
 
-O GL SYSTEM roda na 3000; esta LP usa a **3100** para os dois conviverem.
+### A página está INTEIRA
 
-### O que está pronto
+Seis dobras, nesta ordem:
 
-- `src/design.js` — cores/tipografia/espaçamento extraídos do quiz **sem mudar
-  um valor**. As duas páginas bebem daqui.
-- `src/PaginaComercial.jsx` — **dobra 1 apenas**. Título, subtítulo, CTA e um
-  espaço tracejado reservado para a foto de abertura.
-- `src/App.js` — abre na comercial; o CTA leva ao quiz na mesma URL.
-- `src/GLQualificacao.jsx` — **removido** (era cópia morta do quiz).
-- Conferido na tela em 1440px e 390px, zero rolagem horizontal, `npm run build`
-  compilando limpo.
+1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto." + retrato do GL
+2. **Prova** — "Corpo forte, bonito e funcional. Sem terrorismo." Duas histórias com
+   foto (Maria Eduarda, Aluna GL), faixa de mais três resultados sem legenda, e o
+   Léo em texto no fim
+3. **Dores** — quatro, tiradas das opções do próprio quiz
+4. **Como funciona** — três passos + foto do escritório
+5. **Quem é o Gabriel** — foto do evento; texto fala do que ele resolve, não do currículo
+6. **Entrada** — o quiz apresentado como conversa
 
-### Onde está o código
+`npm run build` compila limpo. Zero rolagem horizontal em 1440px e 390px.
+Oito imagens, todas com alt, nenhuma quebrada, lazy nas de baixo.
 
-Branch **`pagina-comercial`**, com dois commits locais. **Não foi feito push, e
-isso é de propósito:** a `main` é o que a Vercel publica, e a página ainda tem
-um buraco no lugar da foto. Não mandar para a `main` até a seção 2 existir.
+### Decisões desta rodada (autorizadas pelo GL, para ele revisar)
 
-### A próxima tarefa é uma só
+- **A foto de palco do Léo saiu.** Troféu no meio da prova dizia "isto é para
+  atleta" e afastava quem a página quer acolher. Ele ficou como TEXTO no fim da
+  seção, com a moldura "procurou querendo competir".
+- **Nenhum rosto identificável.** A foto de perfil da aluna foi recortada 46%
+  acima; a da Maria Eduarda, 14%.
+- **Nenhum card tem TEMPO.** O GL não lembrava os prazos, e prazo inventado é
+  número que ninguém confere e que derruba tudo se for descoberto.
+- **Três fotos entraram SEM legenda**, na faixa "mais resultados": não havia
+  história contada sobre elas, e legenda inventada sobre pessoa real seria a
+  primeira mentira da página.
+- **Open Graph adicionado.** O link vive na bio do Instagram e é reenviado no
+  WhatsApp; sem as tags a prévia chegava vazia. Imagem 1200x630 em `/prova/og.jpg`.
 
-**Seção 2 — antes e depois.** É a razão de a página existir.
+### O que falta antes de publicar
 
-### O que trava (e é a única coisa que trava)
+1. **Revisão do GL** — principalmente os textos das duas histórias e o da seção
+   "quem é o Gabriel", que foram escritos por mim a partir do que ele contou.
+2. **CREF** — o GL ia passar o número; não entrou em lugar nenhum ainda.
+3. **Tempo de cada aluna**, se ele lembrar. Entra como uma linha em cada card.
+4. **Publicar:** `git checkout main && git merge pagina-comercial && git push`.
+   **NÃO foi feito de propósito** — a `main` é o que a Vercel serve para o link
+   da bio, e a página não pode ir ao ar sem ele ter visto.
 
-**As fotos ainda não existem no projeto.** `public/` está vazio; a LP inteira é
-texto hoje.
+### Aprendizado da autoauditoria
 
-O GL vai colocá-las em **`public/prova/`**. Foto colada no chat o Claude
-**consegue ver, mas não consegue salvar** — para entrar no build, o arquivo tem
-de existir no disco. O chat serve para escolher qual par usar; a pasta serve
-para publicar.
+Rodei a auditoria do passo 8 (nota do cofre) e ela deu **100/100** — o que
+significa que a régua estava frouxa, não que a página estava pronta. Ela checava
+se `title` e `description` EXISTIAM, não se prestavam, e não olhava Open Graph.
+Foi olhando à mão que apareceu o buraco das prévias de link. **Auditoria que
+passa de primeira não auditou.**
 
-De cada par, além da imagem, faltam duas informações:
-- **quanto tempo levou** ("7 meses")
-- **o que mudou FORA do corpo** ("voltou a dormir", "parou de se esconder no
-  espelho", "treina sem dor no joelho")
-
-A segunda linha é o que gera identificação. Corpo bonito ela já viu mil no
-Instagram e ignorou.
-
-Quando as fotos chegarem, o lugar de escrevê-las é a constante `PARES`, no topo
-de `PaginaComercial.jsx` — já está comentada com o formato.
-
-### Por que não adiantamos as outras seções
-
-O GL perguntou se não seria melhor com as fotos primeiro. **Sim, e a decisão foi
-essa.** As fotos mudam o layout (vertical ou horizontal, com rosto ou sem, lado
-a lado ou sobreposto) e mudam o texto da seção "o que eu resolvo" — escrever as
-dores antes de ver quem são essas pessoas seria chute.
-
-### Seções ainda não construídas (ordem acordada)
-
-1. ~~Dobra 1 — o espelho, não o troféu~~ ✅
-2. **Antes e depois** ← próxima, bloqueada nas fotos
-3. O que eu resolvo — nas palavras do lead, tiradas das opções do próprio quiz:
-   *"comecei e não mantive"*, *"me esforcei meses e não mudou quase nada"*,
-   *"nunca tive acompanhamento real"*, *"perdi e recuperei mais de uma vez"*
-4. Como funciona — protocolo individual, check-in semanal, ajuste
-5. Quem é o Gabriel — rosto, CREF, o porquê
-6. A entrada — o quiz apresentado como conversa, não como peneira
-
-### Decisões fechadas, não reabrir
-
-- A página **não fala preço**. Termina no quiz, e o quiz já pergunta sobre
-  investimento.
-- **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio, senão o
-  lead pula a qualificação.
-- **Ângulo do título:** a frustração de recomeçar — *"Você já sabe o que fazer.
-  O que nunca teve foi alguém junto."* Escolhido pelo GL entre quatro opções.
-- **O link da bio não muda.** A troca comercial → quiz é de estado, na mesma
-  URL, para não invalidar o que já está divulgado.
-
-### Antes de publicar (passo que ainda não foi feito)
-
-A nota do cofre *"8 passos para tirar a cara de IA de um site"* pede uma
-**autoauditoria com nota** antes de subir: hierarquia, performance, segurança,
-responsividade e confiança. Régua dela: acima de 50 aceitável, acima de 80 bom.
-Rodar isso quando a página estiver inteira, corrigir o que ela mesma apontar, e
-só então mandar para a `main`.

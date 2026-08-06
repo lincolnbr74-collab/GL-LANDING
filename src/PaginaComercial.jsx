@@ -24,24 +24,32 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
  * o que faz clicar antes de ler.
  */
 
-/* ─────────────────────────────────────────
-   PROVA — pares de antes e depois
-
-   Fotos de aluno real, com autorização (confirmado pelo GL em 06/08).
-   `tempo` e `alem` não são enfeite: é o que transforma foto em
-   identificação. A pessoa não se reconhece num corpo, se reconhece numa
-   história — "voltei a dormir", "parei de me esconder no espelho".
-
-   Enquanto os arquivos não chegam, a lista fica VAZIA e a seção se desenha
-   como reservada. Nada de foto de banco de imagem: a página prometeria uma
-   coisa e a consultoria entregaria outra.
-───────────────────────────────────────── */
+/**
+ * PROVA — só o que é verdade.
+ *
+ * Duas regras que o GL deu em 06/08 e que mandam nesta lista:
+ *
+ * 1. FIDEDIGNO. Onde não há história contada por ele, o card NÃO ganha texto.
+ *    Legenda inventada sobre pessoa real é a primeira mentira da página, e
+ *    derruba a confiança de todas as outras junto. Por isso `historia` é
+ *    opcional: quem não tem, entra na faixa de resultados, sem frase.
+ *
+ * 2. SEM ROSTO. Todas as imagens foram recortadas acima dos ombros quando
+ *    havia rosto identificável. Prova não precisa expor ninguém.
+ *
+ * O QUE SAIU: a foto de palco do Léo. Troféu e palco diziam "isto é para
+ * atleta" bem no meio da seção que existe para acolher quem nunca manteve
+ * rotina. Ele continua na página — como frase, no fim da seção, porque a
+ * história dele é verdadeira e mostra até onde o método vai quando o objetivo
+ * é esse. O que não pode é a imagem virar régua.
+ *
+ * Não há TEMPO em nenhum card: o GL não lembrava os prazos, e prazo inventado
+ * é o tipo de número que ninguém confere e que quebra tudo se for descoberto.
+ */
 export const PARES = [
   {
     img: "/prova/maria-eduarda.webp",
     nome: "Maria Eduarda",
-    // A dor dela é a dor de quem tem agenda mandando na vida — a ponte mais
-    // direta com o posicionamento de "treinador de empresário".
     chamada: "A rotina nunca deixava treinar",
     historia:
       "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
@@ -53,16 +61,13 @@ export const PARES = [
     historia:
       "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
   },
-  {
-    img: "/prova/leo.webp",
-    nome: "Léo",
-    chamada: "Procurou querendo competir",
-    // Moldura obrigatória. Sem o "procurou querendo competir", o palco e os
-    // troféus dizem "isso é para atleta" — e afastam exatamente quem a página
-    // quer acolher. Com ela, o Léo vira teto, não régua.
-    historia:
-      "Bicampeão overall do Men's Physique, com vários destaques no caminho. O objetivo era dele; o método é o mesmo.",
-  },
+];
+
+/** Mais resultados, sem legenda. Imagem fala; texto inventado, não. */
+export const MAIS_RESULTADOS = [
+  { img: "/prova/aluna-perfil.webp", alt: "Antes e depois de aluna da GL Consultoria, vista de perfil" },
+  { img: "/prova/aluna-lado.webp", alt: "Antes e depois de aluna da GL Consultoria, vista lateral" },
+  { img: "/prova/aluna-costas.webp", alt: "Antes e depois de aluna da GL Consultoria, vista de costas" },
 ];
 
 function Ticker() {
@@ -199,13 +204,12 @@ function Hero({ onComecar }) {
 function Prova() {
   return (
     <section style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[32]}px ${SP[24]}px ${SP[64]}px` }}>
-      <h2 style={{ ...TYPE.displayLG, maxWidth: 720 }}>
+      <h2 style={{ ...TYPE.displayLG, maxWidth: 760 }}>
         CORPO FORTE, BONITO E FUNCIONAL.
         <span style={{ color: C.red }}> SEM TERRORISMO.</span>
       </h2>
       <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16], maxWidth: 560 }}>
-        Três pessoas, três pontos de partida diferentes. Nenhuma delas passou fome
-        para chegar aqui.
+        Pontos de partida diferentes. Nenhuma delas passou fome para chegar aqui.
       </p>
 
       <div className="gl-prova-grade" style={{ marginTop: SP[48] }}>
@@ -216,23 +220,17 @@ function Prova() {
               alt={`Antes e depois de ${p.nome}`}
               loading="lazy"
               style={{
-                // Proporção FIXA nas três: os arquivos vêm com alturas
-                // diferentes (973 e 1000 px) e sem isto as legendas começam em
-                // linhas diferentes, o que faz a grade parecer desalinhada.
                 width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
                 display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
               }}
             />
             <figcaption style={{ marginTop: SP[16] }}>
-              <span style={{
-                ...TYPE.monoSM, color: C.red, letterSpacing: "2px",
-                textTransform: "uppercase", display: "block",
-              }}>
+              <span style={{ ...TYPE.monoSM, color: C.red, letterSpacing: "2px", textTransform: "uppercase", display: "block" }}>
                 {p.nome}
               </span>
               <strong style={{
                 display: "block", marginTop: 6, color: C.text,
-                fontFamily: "'Inter',sans-serif", fontSize: 17, fontWeight: 600, lineHeight: 1.35,
+                fontFamily: "'Inter',sans-serif", fontSize: 19, fontWeight: 600, lineHeight: 1.35,
               }}>
                 {p.chamada}
               </strong>
@@ -240,6 +238,261 @@ function Prova() {
             </figcaption>
           </figure>
         ))}
+      </div>
+
+      {/* Faixa sem legenda: acrescenta VOLUME de prova sem acrescentar
+          afirmação. É o jeito honesto de mostrar que não são dois casos
+          isolados quando não se tem a história de cada um. */}
+      <div style={{ marginTop: SP[48] }}>
+        <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "2px", textTransform: "uppercase" }}>
+          Mais resultados
+        </span>
+        <div className="gl-prova-faixa" style={{ marginTop: SP[16] }}>
+          {MAIS_RESULTADOS.map((r) => (
+            <img
+              key={r.img}
+              src={r.img}
+              alt={r.alt}
+              loading="lazy"
+              style={{
+                width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
+                display: "block", borderRadius: BR.md, border: `1px solid ${C.border}`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* O Léo fecha a seção em TEXTO. A história é real e mostra o alcance do
+          método; a foto de palco é que não podia ficar no meio das outras. */}
+      <p style={{
+        ...TYPE.body, color: C.textSub, marginTop: SP[48], maxWidth: 640,
+        paddingLeft: SP[16], borderLeft: `2px solid ${C.red}`,
+      }}>
+        E quando o objetivo é o palco, o método vai até lá: o <strong style={{ color: C.text, fontWeight: 600 }}>Léo</strong> procurou
+        a consultoria querendo competir e virou bicampeão overall do Men&rsquo;s Physique.
+        O objetivo era dele — o acompanhamento é o mesmo.
+      </p>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
+   DOBRA 3 — o que eu resolvo
+
+   As quatro dores NÃO foram inventadas: são as opções que o próprio quiz do
+   GL oferece na pergunta "você já tentou mudar o corpo antes, o que
+   aconteceu?". Ou seja, são as palavras que os leads dele já escolhem — não
+   as minhas. Copy que converte sai do vocabulário de quem lê.
+
+   Seção COM movimento (a de prova, acima, é quieta). O ritmo alterna de
+   propósito: nota "8 passos para tirar a cara de IA de um site".
+───────────────────────────────────────── */
+const DORES = [
+  {
+    titulo: "Comecei e não mantive",
+    texto: "A consistência sempre foi o problema. O plano até existia — o que não existia era alguém percebendo quando ele parou de caber na sua semana.",
+  },
+  {
+    titulo: "Me esforcei meses e não mudou quase nada",
+    texto: "Esforço sem leitura vira desgaste. Sem medir o que está acontecendo, não dá para saber se falta ajuste ou falta tempo.",
+  },
+  {
+    titulo: "Nunca tive acompanhamento real",
+    texto: "Planilha genérica e vídeo de internet não sabem quem é você. Protocolo individual começa por perguntar, não por prescrever.",
+  },
+  {
+    titulo: "Perdi e recuperei mais de uma vez",
+    texto: "Todo protocolo agressivo funciona por um tempo. O que sustenta é o que você consegue manter depois que a novidade passa.",
+  },
+];
+
+function Dores() {
+  return (
+    <section style={{ background: C.surface, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
+      <div style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[64]}px ${SP[24]}px` }}>
+        <h2 style={{ ...TYPE.displayLG, maxWidth: 700 }}>
+          SE VOCÊ SE RECONHECE AQUI,
+          <span style={{ color: C.red }}> É COM ISSO QUE EU TRABALHO.</span>
+        </h2>
+        <div className="gl-dores" style={{ marginTop: SP[48] }}>
+          {DORES.map((d, i) => (
+            <div key={d.titulo} className={`anim-o${i + 1}`} style={{
+              padding: SP[24], background: C.bg,
+              border: `1px solid ${C.border}`, borderRadius: BR.lg,
+            }}>
+              <span style={{ ...TYPE.monoSM, color: C.red, letterSpacing: "2px" }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <strong style={{
+                display: "block", marginTop: SP[12], color: C.text,
+                fontFamily: "'Inter',sans-serif", fontSize: 18, fontWeight: 600, lineHeight: 1.35,
+              }}>
+                {d.titulo}
+              </strong>
+              <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{d.texto}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
+   DOBRA 4 — como funciona
+
+   Três passos, e cada um é uma coisa que o sistema REALMENTE faz: protocolo
+   individual por versão, check-in semanal lido e respondido, ajuste gravado.
+   Nada aqui é promessa de brochura — é o que existe no GL SYSTEM.
+───────────────────────────────────────── */
+const PASSOS = [
+  {
+    n: "01",
+    titulo: "Eu te conheço antes de prescrever",
+    texto: "Anamnese, rotina real, histórico e o que já deu errado. O protocolo é montado depois disso — não antes.",
+  },
+  {
+    n: "02",
+    titulo: "Check-in toda semana",
+    texto: "Você me conta como foi. Eu leio, respondo e registro. É esse retorno semanal que evita você passar um mês inteiro no caminho errado.",
+  },
+  {
+    n: "03",
+    titulo: "O plano muda quando a sua vida muda",
+    texto: "Viagem, plantão, semana atípica, lesão. Ajuste faz parte do método — não é exceção nem recomeço.",
+  },
+];
+
+function Metodo() {
+  return (
+    <section style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[64]}px ${SP[24]}px` }}>
+      <div className="gl-metodo">
+        <div>
+          <h2 style={{ ...TYPE.displayLG }}>
+            COMO FUNCIONA
+          </h2>
+          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16], maxWidth: 420 }}>
+            Sem fórmula fechada e sem dieta de gaveta. O que existe é um processo
+            que continua depois da primeira semana.
+          </p>
+          <img
+            src="/prova/gl-escritorio.webp"
+            alt="Gabriel Lincoln trabalhando no escritório da GL Consultoria"
+            loading="lazy"
+            style={{
+              // Proporção travada: o arquivo é retrato alto (1100x1956) e, solto,
+              // esticava a coluna da esquerda muito além dos três passos —
+              // sobrava um vazio enorme à direita.
+              width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 30%",
+              marginTop: SP[32], display: "block",
+              borderRadius: BR.lg, border: `1px solid ${C.border}`,
+            }}
+          />
+        </div>
+        <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: SP[24] }}>
+          {PASSOS.map((p) => (
+            <li key={p.n} style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: SP[16], alignItems: "start" }}>
+              <span style={{
+                ...TYPE.monoSM, color: C.red, fontSize: 13, letterSpacing: "1px",
+                border: `1px solid ${C.red}`, borderRadius: BR.full, padding: "6px 10px",
+              }}>
+                {p.n}
+              </span>
+              <div>
+                <strong style={{
+                  display: "block", color: C.text, fontFamily: "'Inter',sans-serif",
+                  fontSize: 19, fontWeight: 600, lineHeight: 1.35,
+                }}>
+                  {p.titulo}
+                </strong>
+                <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.texto}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
+   DOBRA 5 — quem é o Gabriel
+
+   NÃO é currículo. O GL foi explícito: "não o que eu faço, não o meu produto,
+   mas o que eu resolvo". Então o texto fala do que muda para ela, e a foto do
+   microfone faz o trabalho de autoridade sem uma linha de autoelogio —
+   ninguém entrega microfone para quem só vende treino e dieta.
+───────────────────────────────────────── */
+function Quem() {
+  return (
+    <section style={{ background: C.surface, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
+      <div className="gl-quem" style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[64]}px ${SP[24]}px` }}>
+        <img
+          src="/prova/gl-palestra.webp"
+          alt="Gabriel Lincoln falando em evento"
+          loading="lazy"
+          style={{
+            width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 25%",
+            display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
+          }}
+        />
+        <div>
+          <span style={{ ...TYPE.monoSM, color: C.red, letterSpacing: "2px", textTransform: "uppercase" }}>
+            Quem vai te acompanhar
+          </span>
+          <h2 style={{ ...TYPE.displayMD, marginTop: SP[12] }}>GABRIEL LINCOLN</h2>
+          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16] }}>
+            Eu não vendo treino e dieta. Isso é o material — qualquer um entrega.
+            O que eu faço é ficar junto no meio do caminho, que é onde as coisas
+            costumam desandar: a semana que virou, a viagem, o mês em que nada saiu
+            como o planejado.
+          </p>
+          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16] }}>
+            Trabalho com quem tem rotina difícil e pouca paciência para método que
+            só funciona em condição ideal. Se para você o problema nunca foi saber
+            o que fazer, e sim sustentar — é exatamente esse o meu trabalho.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─────────────────────────────────────────
+   DOBRA 6 — a entrada
+
+   Aqui a regra do encaixe faz o trabalho pesado. O quiz É uma triagem, e
+   esconder isso seria desonesto; o que muda é QUEM está sendo avaliado. A
+   frase "se eu não for o caminho certo, eu te digo" transforma peneira em
+   conversa — e é ela que derruba o medo de não ser escolhido, que foi a
+   preocupação central do GL.
+───────────────────────────────────────── */
+function Entrada({ onComecar }) {
+  return (
+    <section style={{ maxWidth: 760, margin: "0 auto", padding: `${SP[80]}px ${SP[24]}px`, textAlign: "center" }}>
+      <h2 style={{ ...TYPE.displayLG }}>
+        O PRÓXIMO PASSO É
+        <span style={{ color: C.red }}> UMA CONVERSA.</span>
+      </h2>
+      <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[24] }}>
+        São cinco minutos de perguntas para eu entender a sua rotina, o seu
+        histórico e o que já não funcionou. Não é teste e não tem resposta certa.
+      </p>
+      <p style={{ ...TYPE.body, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
+        Se eu não for o caminho certo pra você, eu te digo — e te aponto o que eu faria no seu lugar.
+      </p>
+      <div style={{ marginTop: SP[32], display: "flex", flexDirection: "column", alignItems: "center", gap: SP[12] }}>
+        <button className="btn-primary" onClick={onComecar} style={{
+          background: C.red, color: "#fff", border: "none", cursor: "pointer",
+          borderRadius: BR.full, padding: "18px 38px",
+          fontFamily: "'Inter',sans-serif", fontSize: 17, fontWeight: 600,
+        }}>
+          Começar as perguntas →
+        </button>
+        <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "1px" }}>
+          Leva menos de 5 minutos · sem compromisso
+        </span>
       </div>
     </section>
   );
@@ -257,6 +510,10 @@ export default function PaginaComercial({ onComecar }) {
       <Ticker />
       <Hero onComecar={onComecar} />
       <Prova />
+      <Dores />
+      <Metodo />
+      <Quem />
+      <Entrada onComecar={onComecar} />
     </div>
   );
 }
