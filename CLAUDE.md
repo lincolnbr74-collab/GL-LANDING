@@ -80,67 +80,110 @@ convida. **Nenhum texto pode sugerir que a pessoa precisa provar que merece.**
   anúncio": melhorar a página multiplica o desempenho de todo conteúdo que o GL
   já gravou. É o item de maior alavancagem do projeto.
 
+- **O repositório não tinha `.gitignore`, e isso custou caro** (06/08). Ao
+  instalar as dependências para trabalhar, `git add -A` varreu 37.499 arquivos
+  de `node_modules` para dentro dos commits — 20 mil linhas só no primeiro. A
+  branch foi reescrita com `filter-branch` antes de qualquer merge, e o
+  `.gitignore` passou a existir. **Neste projeto, confira `git status` antes de
+  `git add -A`.**
+
+- **A skill `frontend-design` está instalada em `~/.claude/skills/`** desde
+  06/08. Ela tinha sido baixada para dentro DESTE repositório (pasta
+  `frontend-design 2`), que é por que não carregava. Skill não mora no projeto.
+
 ## Current Checkpoint
 
-> **Sessão reiniciada? Leia só esta seção.** Estado de 06/08/2026, fim do dia.
+> **Sessão nova? Comece por aqui.** Estado de 06/08/2026, fim do dia.
 
-### Como retomar
+### Em uma frase
+
+A página comercial está **pronta e inteira**, em 15 commits na branch
+`pagina-comercial` (já no GitHub). Falta a revisão do GL, dois textos curtos e
+a publicação.
+
+### Retomar
 
 ```bash
 cd /Users/gabriellincoln/Desktop/GL-LANDING
-git branch --show-current      # pagina-comercial
-PORT=3100 BROWSER=none npm start
+git checkout pagina-comercial
+PORT=3100 BROWSER=none npm start     # abre http://localhost:3100
 ```
 
-### A página está INTEIRA
+A Vercel deve ter gerado um **preview** dessa branch — serve para o GL abrir no
+celular sem servidor local. Vale procurar no painel antes de subir outro.
 
-Seis dobras, nesta ordem:
+### As três coisas que faltam, em ordem
 
-1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto." + retrato do GL
-2. **Prova** — "Corpo forte, bonito e funcional. Sem terrorismo." Duas histórias com
-   foto (Maria Eduarda, Aluna GL), faixa de mais três resultados sem legenda, e o
-   Léo em texto no fim
+**1. As histórias das duas alunas de baixo.** Elas aparecem na grade com foto e
+o rótulo "Aluna GL", sem texto, porque o GL não contou as delas. Basta uma linha
+de cada: **o que travava** e **o que mudou**. O lugar é a constante `PARES`, no
+topo de `PaginaComercial.jsx` — os campos `chamada` e `historia` já existem e
+estão em `null`.
+
+**REGRA QUE NÃO SE NEGOCIA:** nada de frase inventada sobre pessoa real. Se o GL
+não lembrar, o card fica sem texto mesmo. Foi assim que se decidiu não pôr TEMPO
+em nenhum card.
+
+**2. "5 perguntas" contra o contador `/ 07`.** A intro do quiz
+(`LandingPage.jsx`, tela `intro`) promete *"São 5 perguntas rápidas"* e o
+contador mostra 7. É a primeira promessa da página sendo quebrada dois segundos
+depois, no momento exato do compromisso. Duas saídas, e a escolha é do GL:
+trocar o texto para "7 perguntas" (um minuto) ou cortar duas perguntas do quiz
+(decisão comercial — envolve abrir mão de qualificação).
+
+**3. Publicar.** Só depois do aval dele:
+
+```bash
+git checkout main && git merge pagina-comercial && git push
+```
+
+Isso troca o que `entrar.glteamconsultoria.com.br` serve. Hoje aquele endereço
+ainda mostra a versão antiga (só o quiz) — conferido pelas tags Open Graph, que
+existem no build local e não na produção.
+
+### O que a página tem hoje
+
+1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto." +
+   foto do GL de frente, olhando para a câmera
+2. **Prova** — "Corpo forte, bonito e funcional. Sem terrorismo." Grade 2×2:
+   duas alunas com história (Maria Eduarda, Aluna GL), duas só com foto. Dentro
+   do card da segunda, costas e perfil da mesma avaliação. O Léo fecha em texto.
+   CTA no fim da seção, no pico do interesse.
 3. **Dores** — quatro, tiradas das opções do próprio quiz
-4. **Como funciona** — três passos + foto do escritório
-5. **Quem é o Gabriel** — foto do evento; texto fala do que ele resolve, não do currículo
+4. **Como funciona** — três passos + retrato do GL no evento
+5. **Quem é o Gabriel** — escrito a partir do texto que ELE mandou: o menino que
+   achava que não se encaixava. A ponte é estrutural, não retórica: é a mesma
+   insegurança da leitora que acha que não seria selecionada.
 6. **Entrada** — o quiz apresentado como conversa
 
-`npm run build` compila limpo. Zero rolagem horizontal em 1440px e 390px.
-Oito imagens, todas com alt, nenhuma quebrada, lazy nas de baixo.
+### Verificado (não é opinião)
 
-### Decisões desta rodada (autorizadas pelo GL, para ele revisar)
+- `npm run build` limpo
+- 0 de rolagem horizontal em 390, 768, 834, 1024, 1280 e 1440
+- **Nenhuma foto de antes e depois recortada** — medido comparando proporção
+  natural com a da caixa. Só a foto do microfone é cortada, de propósito
+- 3 CTAs em toda largura; fluxo comercial → quiz → gênero → pergunta 01/07
+  testado por clique
+- Todas as imagens com `alt`, nenhuma quebrada, `lazy` abaixo da dobra
+- Open Graph completo (o link vive na bio do Instagram e é reenviado no
+  WhatsApp; sem isso a prévia chegava vazia)
 
-- **A foto de palco do Léo saiu.** Troféu no meio da prova dizia "isto é para
-  atleta" e afastava quem a página quer acolher. Ele ficou como TEXTO no fim da
-  seção, com a moldura "procurou querendo competir".
-- **Nenhum rosto identificável.** A foto de perfil da aluna foi recortada 46%
-  acima; a da Maria Eduarda, 14%.
-- **Nenhum card tem TEMPO.** O GL não lembrava os prazos, e prazo inventado é
-  número que ninguém confere e que derruba tudo se for descoberto.
-- **Três fotos entraram SEM legenda**, na faixa "mais resultados": não havia
-  história contada sobre elas, e legenda inventada sobre pessoa real seria a
-  primeira mentira da página.
-- **Open Graph adicionado.** O link vive na bio do Instagram e é reenviado no
-  WhatsApp; sem as tags a prévia chegava vazia. Imagem 1200x630 em `/prova/og.jpg`.
+### Decisões fechadas, não reabrir
 
-### O que falta antes de publicar
+- A página **não fala preço**. Termina no quiz, que já pergunta sobre investimento
+- **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio
+- **Nenhum rosto identificável** nas fotos de aluno
+- **A foto de palco do Léo não entra.** Troféu no meio da prova diz "isto é para
+  atleta" e afasta quem a página quer acolher. Ele ficou como texto
+- **O link da bio não muda:** a troca comercial → quiz é de estado, na mesma URL
+- Ângulo do título: a frustração de recomeçar, escolhido pelo GL entre quatro
 
-1. **Revisão do GL** — principalmente os textos das duas histórias e o da seção
-   "quem é o Gabriel", que foram escritos por mim a partir do que ele contou.
-2. ~~CREF~~ — **adiado pelo GL em 06/08**: a documentação dele só fica pronta na
-   semana seguinte. **Não bloqueia nada.** Não há placeholder nem lacuna na
-   página; a seção "quem é o Gabriel" fecha sem o número, e ele entra depois
-   como uma linha. Marcador do que não existe tem o hábito de ir para o ar.
-3. **Tempo de cada aluna**, se ele lembrar. Entra como uma linha em cada card.
-4. **Publicar:** `git checkout main && git merge pagina-comercial && git push`.
-   **NÃO foi feito de propósito** — a `main` é o que a Vercel serve para o link
-   da bio, e a página não pode ir ao ar sem ele ter visto.
+### Na mesa, sem decisão
 
-### Aprendizado da autoauditoria
-
-Rodei a auditoria do passo 8 (nota do cofre) e ela deu **100/100** — o que
-significa que a régua estava frouxa, não que a página estava pronta. Ela checava
-se `title` e `description` EXISTIAM, não se prestavam, e não olhava Open Graph.
-Foi olhando à mão que apareceu o buraco das prévias de link. **Auditoria que
-passa de primeira não auditou.**
-
+- Um **antes e depois masculino** que o GL nunca mencionou, em
+  `public/prova/atalho de CONSULTORIA ONLINE GL.JPG`: de frente, num ginásio,
+  sem palco e sem troféu. Muito mais próximo do leitor comum que o do Léo
+- A foto de piscina/praia (`470c2dd0…`) ficou **de fora**: rosto visível nos dois
+  lados, e cenário/luz diferentes entre antes e depois enfraquecem a comparação
+- **CREF** — adiado pelo GL; a documentação dele fica pronta na semana de 10/08.
+  Não bloqueia: não há placeholder na página
