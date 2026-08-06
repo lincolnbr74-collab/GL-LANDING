@@ -1,0 +1,17 @@
+# Originais NÃO entram no repositório.
+#
+# Histórico de git é permanente: foto de aluno commitada fica lá para sempre,
+# mesmo que apagada depois. E foto de celular carrega EXIF — modelo do
+# aparelho, data e muitas vezes a coordenada de GPS de onde foi tirada.
+#
+# O que vai para o build são os .webp gerados a partir daqui: o cwebp descarta
+# metadados por padrão (-metadata none) e o arquivo sai bem mais leve.
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.png
+*.PNG
+*.heic
+*.HEIC
+!*.webp
