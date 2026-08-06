@@ -93,133 +93,128 @@ convida. **Nenhum texto pode sugerir que a pessoa precisa provar que merece.**
 
 ## Current Checkpoint
 
-> **Sessão nova? Comece por aqui.** Estado de 06/08/2026, fim do dia.
+> **Sessão nova? Comece por aqui.** Estado de 06/08/2026, noite.
 
 ### Em uma frase
 
-A página comercial está **pronta e inteira**, em 15 commits na branch
-`pagina-comercial` (já no GitHub). Falta a revisão do GL, dois textos curtos e
-a publicação.
+**A página comercial ESTÁ NO AR.** `entrar.glteamconsultoria.com.br` deixou de
+servir só o quiz em 06/08, às 20h — a `pagina-comercial` foi para a `main` (31
+commits) e a Vercel publicou. Conferido no domínio, não no localhost.
 
 ### Retomar
 
 ```bash
 cd /Users/gabriellincoln/Desktop/GL-LANDING
-git checkout pagina-comercial
+git checkout main
 PORT=3100 BROWSER=none npm start     # abre http://localhost:3100
 ```
 
-A Vercel deve ter gerado um **preview** dessa branch — serve para o GL abrir no
-celular sem servidor local. Vale procurar no painel antes de subir outro.
+**Trabalhe na `main`.** A `pagina-comercial` cumpriu o papel e está fundida; ela
+só existe agora como histórico.
 
-### Onde ficam os originais (regra nova, 06/08)
+### Como conferir o que está no ar (sem chutar)
+
+```bash
+# qual pacote a produção está servindo
+curl -s https://entrar.glteamconsultoria.com.br/ | grep -o 'main\.[a-z0-9]*\.js'
+
+# comparar com o que o build local gerou
+CI=true npm run build | grep 'main\.'
+```
+
+Se os dois nomes batem, o que você está vendo no localhost é o que o lead vê.
+A Vercel leva de 30 a 60 segundos depois do `git push origin main`.
+
+### Como provar responsividade (não confie no print headless)
+
+Chrome headless com `--window-size` **não** emula viewport de celular: o texto
+sai cortado na captura mesmo com a página perfeita. O que vale é medir dentro
+do navegador. O truque usado aqui: um HTML temporário em `public/` com um
+iframe que varre as larguras e imprime `scrollWidth` contra `clientWidth` —
+apagar depois de medir.
+
+Última medição (06/08, antes de publicar): **zero estouro** em 390, 414, 768,
+834, 1024, 1280 e 1440; 11 imagens carregadas, 0 quebradas.
+
+### Onde ficam os originais (regra que já custou caro)
 
 `public/` é público: **tudo** que está lá vai para o build e para a internet,
-inclusive o que a página não usa. Estavam indo para o ar os originais com nome
-de aluna no arquivo. Agora:
+inclusive o que a página não usa. Já foram para o ar originais com nome de
+aluna no arquivo, e 3,1 MB de arte que ninguém chamava.
 
 | Pasta | O que é |
 |---|---|
-| `fontes-privadas/` | originais (JPG/HEIC/PDF). Fora do build, fora do git |
+| `fontes-privadas/` | originais (JPG/HEIC/PDF/PNG de marca). Fora do build e do git |
 | `public/prova/` | só os `.webp` da página, com **nome neutro** |
+| `public/marca/` | só o `gl-tela.webp` (papel de parede da tela do notebook) |
 
 Nome de arquivo é endereço público: `/prova/fulana-de-tal.webp` nomeia a aluna
 mesmo com o card escrito "Aluna GL".
 
-**Quem é quem** (pelos nomes que o GL deu aos arquivos — **confirmar com ele
-antes de qualquer nome ir para um card**):
+**Quem é quem** — confirmado pelo GL em 06/08, conferido foto a foto contra os
+originais:
 
-| Arquivo na página | Aluna |
-|---|---|
-| `aluna-cortina.webp` | Hemanoelly Vieira |
-| `aluna-frente/costas/lado.webp` | Isis Otoni |
-| `aluna-lateral.webp` | Giovanna Caires |
-| `maria-eduarda-*.webp` | Maria Eduarda (confirmada por ele) |
+| Arquivo na página | Aluna | Card |
+|---|---|---|
+| `aluna-frente/costas/lado.webp` | Isis Otoni | 1º |
+| `maria-eduarda-*.webp` | Maria Eduarda | 2º |
+| `aluna-cortina.webp` | Hemanoelly Vieira | 3º |
+| `aluna-lateral.webp` | Giovanna Caires | 4º |
 
-### Pendências abertas com o GL (06/08, fim da tarde)
-
-- **Prints de depoimento na tela do notebook.** Ele vai anexar. Até lá a tela
-  fica coberta e apagada (o clip-path já está no lugar, em `Metodo`).
-- **Nome nos cards das alunas** — depende de confirmação dele e de autorização
-  delas. Ver a tabela acima.
-- **Depoimento fidedigno das alunas.** O roteiro de perguntas está em
-  `PERGUNTAS-DEPOIMENTO.md`, na raiz. Ele decidiu deixar para o fim.
-
-### As três coisas que faltam, em ordem
-
-**1. As histórias das duas alunas de baixo.** Elas aparecem na grade com foto e
-o rótulo "Aluna GL", sem texto, porque o GL não contou as delas. Basta uma linha
-de cada: **o que travava** e **o que mudou**. O lugar é a constante `PARES`, no
-topo de `PaginaComercial.jsx` — os campos `chamada` e `historia` já existem e
-estão em `null`.
-
-**REGRA QUE NÃO SE NEGOCIA:** nada de frase inventada sobre pessoa real. Se o GL
-não lembrar, o card fica sem texto mesmo. Foi assim que se decidiu não pôr TEMPO
-em nenhum card.
-
-**2. "5 perguntas" contra o contador `/ 07`.** A intro do quiz
-(`LandingPage.jsx`, tela `intro`) promete *"São 5 perguntas rápidas"* e o
-contador mostra 7. É a primeira promessa da página sendo quebrada dois segundos
-depois, no momento exato do compromisso. Duas saídas, e a escolha é do GL:
-trocar o texto para "7 perguntas" (um minuto) ou cortar duas perguntas do quiz
-(decisão comercial — envolve abrir mão de qualificação).
-
-**3. Publicar.** Só depois do aval dele:
-
-```bash
-git checkout main && git merge pagina-comercial && git push
-```
-
-Isso troca o que `entrar.glteamconsultoria.com.br` serve. Hoje aquele endereço
-ainda mostra a versão antiga (só o quiz) — conferido pelas tags Open Graph, que
-existem no build local e não na produção.
+Nos cards vai **só o primeiro nome**. Sobrenome em cima de foto de biquíni
+identifica a mulher em qualquer busca.
 
 ### O que a página tem hoje
 
-1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto." +
-   a foto do microfone (trocada em 06/08 com a de camiseta branca, que desceu
-   para "quem vai te acompanhar" — pedido do GL: "inverter")
-2. **Prova** — "Corpo forte, bonito e funcional. Sem terrorismo." Grade 2×2:
-   duas alunas com história (Maria Eduarda, Aluna GL), duas só com foto. Dentro
-   do card da segunda, costas e perfil da mesma avaliação. O Léo fecha em texto.
-   CTA no fim da seção, no pico do interesse.
+1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto."
+2. **Prova** — quatro alunas, todas com nome, chamada e história. Isis e Maria
+   Eduarda (com fotos extras) dividem a primeira linha; Hemanoelly e Giovanna a
+   segunda. Cada card com moldura
 3. **Dores** — quatro, tiradas das opções do próprio quiz
-4. **Como funciona** — SETE passos (reescrita em 06/08: o GL disse que estava
-   "muito vago e carente de informações do que realmente fazemos") + a foto dele
-   com o notebook, com a tela do Windows coberta
-5. **Quem é o Gabriel** — escrito a partir do texto que ELE mandou: o menino que
-   achava que não se encaixava. A ponte é estrutural, não retórica: é a mesma
-   insegurança da leitora que acha que não seria selecionada.
+4. **Como funciona** — sete itens (o que o aluno recebe), a credencial do
+   nutricionista com CRN, e a foto do notebook com o papel de parede do GL
+5. **Quem é o Gabriel** — a história dele, e a credencial DEPOIS do medo
 6. **Entrada** — o quiz apresentado como conversa
 
-### Verificado (não é opinião)
+### Pendências abertas com o GL
 
-- `npm run build` limpo
-- 0 de rolagem horizontal em 390, 768, 834, 1024, 1280 e 1440
-- **Nenhuma foto de antes e depois recortada** — medido comparando proporção
-  natural com a da caixa. Só a foto do microfone é cortada, de propósito
-- 3 CTAs em toda largura; fluxo comercial → quiz → gênero → pergunta 01/07
-  testado por clique
-- Todas as imagens com `alt`, nenhuma quebrada, `lazy` abaixo da dobra
-- Open Graph completo (o link vive na bio do Instagram e é reenviado no
-  WhatsApp; sem isso a prévia chegava vazia)
+0. **Depoimento fidedigno das alunas.** O roteiro de perguntas para ele mandar
+   no WhatsApp está em `PERGUNTAS-DEPOIMENTO.md`, na raiz, e no cofre em
+   `05 GL SYSTEM/Consultoria online/Perguntas para depoimento de aluna.md`.
+   As quatro já têm história contada por ele; o roteiro serve para as próximas.
+1. **Prints de depoimento na tela do notebook.** Ele vai anexar. Hoje a tela
+   mostra o papel de parede da marca; os prints entram no MESMO recorte, é só
+   trocar o conteúdo do `<g clipPath>` em `Metodo`.
+2. **"A diferença da foto é de um mês"** (card da Hemanoelly) — é o único prazo
+   curto da página e o mais contestável. Ele foi avisado; a decisão é dele.
+3. **"Chegou pensando em cirurgia estética"** foi tirado da Isis por não estar
+   no relato dele. Se ele confirmar, volta.
+4. **CREF** — a documentação fica pronta na semana de 10/08. Não bloqueia nada.
 
 ### Decisões fechadas, não reabrir
 
 - A página **não fala preço**. Termina no quiz, que já pergunta sobre investimento
 - **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio
-- **Nenhum rosto identificável** nas fotos de aluno
-- **A foto de palco do Léo não entra.** Troféu no meio da prova diz "isto é para
-  atleta" e afasta quem a página quer acolher. Ele ficou como texto
-- **O link da bio não muda:** a troca comercial → quiz é de estado, na mesma URL
-- Ângulo do título: a frustração de recomeçar, escolhido pelo GL entre quatro
+- **Nenhum rosto identificável** em foto de aluna
+- **O Léo saiu inteiro** — foto e texto. Troféu e palco diziam "isto é para
+  atleta" no meio da seção que existe para acolher quem nunca manteve rotina
+- **O link da bio não muda:** comercial → quiz é troca de estado, mesma URL
+- **Nada de print de produto inventado.** A tela do notebook mostra a marca, não
+  uma interface que ninguém viu
+- **Tempo: "menos de 5 minutos"** nos quatro lugares das duas páginas. Número
+  maior de propósito — é o único que não tem como quebrar promessa
+- **O quiz tem 7 perguntas** e a intro diz 7. Já disse 5 e foi corrigido antes
+  de publicar
 
-### Na mesa, sem decisão
+### Armadilhas que já morderam aqui
 
-- Um **antes e depois masculino** que o GL nunca mencionou, em
-  `public/prova/atalho de CONSULTORIA ONLINE GL.JPG`: de frente, num ginásio,
-  sem palco e sem troféu. Muito mais próximo do leitor comum que o do Léo
-- A foto de piscina/praia (`470c2dd0…`) ficou **de fora**: rosto visível nos dois
-  lados, e cenário/luz diferentes entre antes e depois enfraquecem a comparação
-- **CREF** — adiado pelo GL; a documentação dele fica pronta na semana de 10/08.
-  Não bloqueia: não há placeholder na página
+- **Crase dentro de comentário de CSS derruba o build.** O CSS mora em template
+  literal de JS; uma crase solta encerra a string. Aconteceu DUAS vezes em 06/08
+- **`object-fit: contain` não resolveu o encaixe das fotos.** O que funcionou
+  foi limite máximo de largura e altura com dimensão automática, dentro de uma
+  caixa `aspect-ratio` — ver `.gl-foto-caixa` em `design.js`
+- **A máquina não tem Pillow nem ImageMagick**, e o ffmpeg instalado **não tem
+  encoder de webp**. Para webp use `cwebp`; para recortar, `ffmpeg`; para
+  recolorir PNG, script Python puro (há um no histórico do git, commit `e6e6a07`)
+- **Duas sessões no mesmo repositório ao mesmo tempo** aconteceu em 06/08 e
+  quase custou trabalho. Antes de editar, `git log --oneline -3` e `git status`
