@@ -1,0 +1,12 @@
+# Dependências: são reinstaláveis com `npm install` e não pertencem ao git.
+node_modules/
+
+# Saída de build: a Vercel gera na nuvem a cada deploy.
+build/
+
+# Lixo do macOS
+.DS_Store
+
+# Ambiente
+.env
+.env.local
