@@ -650,21 +650,26 @@ function Metodo() {
               <g clipPath="url(#glRecorteTela)">
                 <rect x="500" y="460" width="490" height="280" fill="url(#glTela)" />
                 <ellipse cx="742" cy="598" rx="260" ry="150" fill="url(#glBrilho)" />
+                {/* A LOGO DE VERDADE, anexada pelo GL em 06/08. Antes disto a
+                    tela trazia "GL" desenhado em Anton — servia, mas era a
+                    letra, não a marca.
+
+                    É a versão CLARA do símbolo, gerada a partir do original: no
+                    arquivo dele metade do símbolo é quase preta, e sobre a tela
+                    escura essa metade simplesmente sumia. Os pixels cinzentos
+                    viraram branco e o vermelho ficou intacto — o teste é a
+                    diferença entre os canais, então nada de vermelho foi
+                    tocado. O original continua em `public/marca/SIMBOOLO.png`. */}
+                <image
+                  href="/marca/gl-simbolo-claro.png"
+                  x="672" y="505" width="140" height="130"
+                  preserveAspectRatio="xMidYMid meet"
+                />
                 <text
-                  x="742" y="600"
-                  textAnchor="middle"
-                  fontFamily="'Anton', sans-serif"
-                  fontSize="104"
-                  fill="#FFFFFF"
-                  letterSpacing="6"
-                >
-                  GL
-                </text>
-                <text
-                  x="742" y="650"
+                  x="742" y="688"
                   textAnchor="middle"
                   fontFamily="'JetBrains Mono', monospace"
-                  fontSize="21"
+                  fontSize="20"
                   fill="#E10A1F"
                   letterSpacing="7"
                 >
