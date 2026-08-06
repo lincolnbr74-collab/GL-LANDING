@@ -570,6 +570,37 @@ function Quem() {
             Demorei para entender que aquilo não era fraqueza. Era fase, era
             construção — e ninguém me disse isso na época.
           </p>
+          {/*
+            CREDENCIAL, acrescentada em 06/08 com os dados do próprio GL.
+
+            A seção tinha vulnerabilidade e zero competência. São DUAS perguntas
+            diferentes na cabeça de quem lê — "esse cara me entende?" e "esse
+            cara sabe o que faz?" — e a página só respondia a primeira, para
+            alguém que está decidindo entregar o corpo dela a um estranho da
+            internet.
+
+            Vem DEPOIS do medo, não antes: antes seria currículo; depois, é
+            alguém que já provou que sabe escolhendo falar do que teve medo.
+
+            O número não é placar. Ele existe para provar de onde saiu o título
+            da página ("o que nunca teve foi alguém junto"): 300 pessoas, seis
+            países, sempre o mesmo buraco. Deixa de dizer "eu sou grande" e passa
+            a dizer "eu já vi o seu caso".
+
+            A ressalva do fisiculturismo NÃO é modéstia — é a mesma razão que
+            tirou a foto de palco do Léo da prova. Sozinha, a palavra dispara
+            "isto é para atleta, não é para mim" na leitora que a página existe
+            para acolher. Sem essa segunda frase, eu não colocaria a primeira.
+          */}
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+            Sou formado em Educação Física e fui atleta de fisiculturismo. Faço
+            isso há mais de dez anos. Já acompanhei mais de 300 pessoas, em seis
+            países, e o que trava é quase sempre a mesma coisa: ninguém do lado.
+          </p>
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+            O fisiculturismo me ensinou o método. Não é o que eu vendo — quase
+            ninguém que eu atendo quer subir num palco.
+          </p>
           <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
             É por isso que aqui você não precisa se encaixar em nada. Nem em dieta
             impossível, nem em rotina de atleta, nem num padrão que outra pessoa
