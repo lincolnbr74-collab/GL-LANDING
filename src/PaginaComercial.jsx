@@ -50,6 +50,11 @@ export const PARES = [
   {
     img: "/prova/maria-eduarda.webp",
     nome: "Maria Eduarda",
+    // Proporção do arquivo (1080x1050). Antes eu tinha cortado 14% do topo
+    // "por segurança" e o quadrado do card comeu o resto — a foto aparecia do
+    // quadril para baixo. O original não tem rosto: ela está de costas para a
+    // câmera nos dois lados. Corte desnecessário, desfeito.
+    proporcao: "1080 / 1050",
     chamada: "A rotina nunca deixava treinar",
     historia:
       "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
@@ -57,6 +62,9 @@ export const PARES = [
   {
     img: "/prova/aluna-frente.webp",
     nome: "Aluna GL",
+    // Proporção do arquivo (1000x840), pelo mesmo motivo da Maria: forçada em
+    // quadrado, o `cover` comia parte do antes e depois.
+    proporcao: "1000 / 840",
     chamada: "Já tinha emagrecido. Faltava perder o medo",
     historia:
       "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
@@ -292,8 +300,10 @@ function Prova({ onComecar }) {
                         alt={a.alt}
                         loading="lazy"
                         style={{
-                          width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
-                          display: "block", borderRadius: BR.md, border: `1px solid ${C.border}`,
+                          // Sem proporção forçada: mesmo em miniatura, um antes
+                          // e depois cortado ao meio deixa de ser comparação.
+                          width: "100%", height: "auto", display: "block",
+                          borderRadius: BR.md, border: `1px solid ${C.border}`,
                         }}
                       />
                     ))}
