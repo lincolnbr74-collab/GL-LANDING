@@ -139,8 +139,25 @@ function Hero({ onComecar }) {
         </div>
       </div>
 
-      <div className="anim-sub">
-        {PARES.length > 0 ? null : <VagaDeFoto rotulo="Foto de abertura — antes e depois" altura={480} />}
+      {/* O retrato abre a página, e não um corpo. O título diz "o que nunca
+          teve foi ALGUÉM JUNTO" — e o rosto ao lado é a resposta literal da
+          frase. Corpo aqui faria a página parecer sobre estética; rosto faz
+          ela parecer sobre acompanhamento, que é o que ele vende.
+          Escolhida entre nove: é a única em ambiente real, com olhar quase na
+          câmera e expressão de quem conversa. As de estúdio com notebook são
+          bem feitas, mas leem como ensaio — e ensaio genérico é justamente o
+          que o cofre chama de "cara de IA". */}
+      <div className="anim-sub gl-hero-foto">
+        <img
+          src="/prova/gl-retrato.webp"
+          alt="Gabriel Lincoln, treinador responsável pela consultoria"
+          width={920}
+          height={1150}
+          style={{
+            width: "100%", height: "auto", display: "block",
+            borderRadius: BR.lg, border: `1px solid ${C.border}`,
+          }}
+        />
       </div>
     </section>
   );
