@@ -239,21 +239,32 @@ function Hero({ onComecar }) {
       </div>
 
       {/* O retrato abre a página, e não um corpo. O título diz "o que nunca
-          teve foi ALGUÉM JUNTO" — e o rosto ao lado é a resposta literal da
+          teve foi ALGUÉM JUNTO" — e a pessoa ao lado é a resposta literal da
           frase. Corpo aqui faria a página parecer sobre estética; rosto faz
           ela parecer sobre acompanhamento, que é o que ele vende.
-          Escolhida entre nove: é a única em ambiente real, com olhar quase na
-          câmera e expressão de quem conversa. As de estúdio com notebook são
-          bem feitas, mas leem como ensaio — e ensaio genérico é justamente o
-          que o cofre chama de "cara de IA". */}
+
+          TROCA DE 06/08, pedida pelo GL: a foto do microfone, que estava lá
+          embaixo em "quem vai te acompanhar", passa a ABRIR a página, e a de
+          camiseta branca desce para o lugar dela. Ele pediu literalmente
+          "inverter" as duas.
+          Ganho de leitura: quem chega do Instagram vê autoridade antes de ler
+          qualquer linha — ninguém entrega microfone para quem só vende treino
+          e dieta — e a foto de camiseta, mais próxima e olhando na câmera,
+          passa a ficar exatamente onde ele se apresenta pessoalmente.
+
+          Recortada em 4/5: o arquivo é 1100x1650 e, solto, empurrava a dobra 1
+          para ~900px de altura no desktop, jogando o botão para fora da tela.
+          O corte tira só borda de teto e de chão — cabeça, microfone e joelho
+          continuam dentro. */}
       <div className="anim-sub gl-hero-foto">
         <img
-          src="/prova/gl-frente.webp"
-          alt="Gabriel Lincoln, treinador responsável pela consultoria"
-          width={920}
-          height={1150}
+          src="/prova/gl-palestra.webp"
+          alt="Gabriel Lincoln falando com o microfone na mão, em evento"
+          width={1100}
+          height={1375}
           style={{
-            width: "100%", height: "auto", display: "block",
+            width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 20%",
+            height: "auto", display: "block",
             borderRadius: BR.lg, border: `1px solid ${C.border}`,
           }}
         />
@@ -445,25 +456,65 @@ function Dores() {
 /* ─────────────────────────────────────────
    DOBRA 4 — como funciona
 
-   Três passos, e cada um é uma coisa que o sistema REALMENTE faz: protocolo
-   individual por versão, check-in semanal lido e respondido, ajuste gravado.
-   Nada aqui é promessa de brochura — é o que existe no GL SYSTEM.
+   REESCRITA EM 06/08. O GL abriu a página e disse: "COMO FUNCIONA está muito
+   vago e carente de informações do que realmente fazemos". Estava certo — a
+   seção tinha três passos que qualquer consultoria do Instagram assinaria
+   ("eu te conheço antes de prescrever", "check-in toda semana", "o plano
+   muda"). Nenhum deles dizia o que a pessoa RECEBE.
+
+   Os sete passos abaixo são a lista que ele ditou, sem invenção nenhuma:
+   anamnese, treino e dieta por aplicativo, dieta prescrita por nutricionista,
+   WhatsApp individualizado, correção de execução, leitura de exame
+   laboratorial, check-in semanal, check shape (comparativo de evolução),
+   feedback e atualização mensal dos planos.
+
+   Por que sete e não três: aqui a pessoa já se reconheceu nas dores e viu a
+   prova. Esta é a dobra em que ela quer saber o que compra. Vago no lugar
+   errado custa caro — vago AQUI é o que faz ela sair para perguntar no direct.
+
+   Regra mantida: nada de promessa de brochura. Cada linha é coisa que já
+   existe (as sete estão no GL SYSTEM ou no dia a dia dele).
 ───────────────────────────────────────── */
 const PASSOS = [
   {
     n: "01",
-    titulo: "Eu te conheço antes de prescrever",
-    texto: "Anamnese, rotina real, histórico e o que já deu errado. O protocolo é montado depois disso — não antes.",
+    titulo: "Anamnese antes de qualquer prescrição",
+    texto: "Rotina real, histórico, lesão, remédio, o que já deu errado — e o seu exame de sangue, quando você tem. Eu leio o laudo e o protocolo sai depois disso, não antes.",
   },
   {
     n: "02",
+    titulo: "Treino e dieta no aplicativo",
+    texto: "Série, carga, progressão e vídeo de execução na mão, no dia. Nada de PDF que envelhece na galeria do celular.",
+  },
+  {
+    n: "03",
+    // O CRN e a foto do nutri ficam de fora ATÉ o GL mandar os dados (pedido
+    // dele em 06/08: "podendo adicionar a foto e o CRN do nutri"). Número de
+    // registro profissional é dado conferível: inventar ou aproximar aqui é
+    // pior do que não ter. Quando ele mandar nome + CRN + foto, isto vira um
+    // bloco de credencial ao lado do passo.
+    titulo: "A dieta é prescrita por nutricionista",
+    texto: "Quem prescreve a sua dieta é nutricionista com registro, não um treinador chutando caloria. Com substituição pronta para o dia em que a comida do plano não existe.",
+  },
+  {
+    n: "04",
+    titulo: "WhatsApp direto comigo",
+    texto: "Dúvida no meio do treino, cardápio de restaurante, plantão que virou a noite. Você fala comigo — não com atendente, não com grupo, não com robô.",
+  },
+  {
+    n: "05",
+    titulo: "Correção de execução",
+    texto: "Você grava a série e eu assisto. Técnica errada é o que faz treinar muito e mudar pouco — e é o que machuca quem estava indo bem.",
+  },
+  {
+    n: "06",
     titulo: "Check-in toda semana",
     texto: "Você me conta como foi. Eu leio, respondo e registro. É esse retorno semanal que evita você passar um mês inteiro no caminho errado.",
   },
   {
-    n: "03",
-    titulo: "O plano muda quando a sua vida muda",
-    texto: "Viagem, plantão, semana atípica, lesão. Ajuste faz parte do método — não é exceção nem recomeço.",
+    n: "07",
+    titulo: "Check shape e plano novo todo mês",
+    texto: "Comparativo de evolução lado a lado, feedback do que mudou e treino e dieta atualizados. E, no meio do mês, se a sua vida virar: viagem, lesão, semana atípica. Ajuste faz parte do método — não é exceção nem recomeço.",
   },
 ];
 
@@ -476,22 +527,52 @@ function Metodo() {
             COMO FUNCIONA
           </h2>
           <p style={{ ...TYPE.lead, color: C.textSub, marginTop: SP[16], maxWidth: 460 }}>
-            Sem fórmula fechada e sem dieta de gaveta. O que existe é um processo
-            que continua depois da primeira semana.
+            Sem fórmula fechada e sem dieta de gaveta. Isto é o que você recebe,
+            item por item — e o que continua acontecendo depois da primeira
+            semana.
           </p>
-          <img
-            src="/prova/gl-retrato.webp"
-            alt="Gabriel Lincoln, responsável pela GL Consultoria"
-            loading="lazy"
-            style={{
-              // Proporção travada: o arquivo é retrato alto (1100x1956) e, solto,
-              // esticava a coluna da esquerda muito além dos três passos —
-              // sobrava um vazio enorme à direita.
-              width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 20%",
-              marginTop: SP[32], display: "block",
-              borderRadius: BR.lg, border: `1px solid ${C.border}`,
-            }}
-          />
+          {/* A FOTO DO NOTEBOOK, pedida pelo GL em 06/08 para esta seção. Ela
+              diz "acompanhamento" melhor que qualquer retrato: é ele com a
+              ferramenta na mão, na dobra que explica o trabalho.
+
+              A TELA ESTÁ COBERTA, de propósito. O arquivo original mostra a
+              tela de bloqueio do Windows, com relógio e data — e o GL foi
+              explícito: "não gostaria de colocar o fundo com o Windows da
+              imagem". A cobertura é um quadrilátero em clip-path, com os quatro
+              cantos medidos no arquivo (o notebook está levemente inclinado, um
+              retângulo reto não encaixaria). Como está em %, acompanha a foto
+              em qualquer largura.
+
+              É NESSE ESPAÇO que entram os prints de depoimento que ele vai
+              anexar. Enquanto não chegam, a tela fica apagada — que é honesto e
+              não finge conteúdo nenhum.
+
+              Sobre a foto ser de estúdio, com fundo claro: é o único ponto
+              claro da página, e por isso mesmo prende o olho na dobra em que a
+              pessoa decide se vale continuar lendo. */}
+          <div style={{ position: "relative", marginTop: SP[32], borderRadius: BR.lg, overflow: "hidden", border: `1px solid ${C.border}` }}>
+            <img
+              src="/prova/gl-notebook.webp"
+              alt="Gabriel Lincoln com o notebook na mão, onde acompanha os alunos"
+              loading="lazy"
+              width={1100}
+              height={1375}
+              style={{
+                // O arquivo JÁ é 4/5 (1100x1375), recortado no disco: sem corte
+                // no navegador, os cantos da tela caem sempre no mesmo lugar e
+                // a cobertura em % nunca sai do sítio.
+                width: "100%", height: "auto", display: "block",
+              }}
+            />
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute", inset: 0,
+                clipPath: "polygon(46.2% 33.9%, 88.8% 34.2%, 88.6% 53.2%, 46.1% 52.7%)",
+                background: `linear-gradient(150deg, #16161c 0%, #0d0d11 55%, #08080a 100%)`,
+              }}
+            />
+          </div>
         </div>
         <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: SP[24] }}>
           {PASSOS.map((p) => (
@@ -531,12 +612,16 @@ function Quem() {
   return (
     <section style={{ background: C.surface, borderTop: `1px solid ${C.border}`, borderBottom: `1px solid ${C.border}` }}>
       <div className="gl-quem" style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[64]}px ${SP[24]}px` }}>
+        {/* A CAMISETA BRANCA DESCEU PARA CÁ (06/08, "inverter" pedido pelo GL —
+            ver o comentário na dobra 1). É a foto mais próxima do conjunto:
+            olhando na câmera, em academia real, sem palco. É o rosto certo para
+            a seção em que ele se apresenta e conta do que teve medo. */}
         <img
-          src="/prova/gl-palestra.webp"
-          alt="Gabriel Lincoln falando em evento"
+          src="/prova/gl-frente.webp"
+          alt="Gabriel Lincoln, treinador responsável pela consultoria"
           loading="lazy"
           style={{
-            width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 25%",
+            width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 30%",
             display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
           }}
         />

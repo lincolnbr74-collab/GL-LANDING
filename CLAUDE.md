@@ -112,6 +112,17 @@ PORT=3100 BROWSER=none npm start     # abre http://localhost:3100
 A Vercel deve ter gerado um **preview** dessa branch — serve para o GL abrir no
 celular sem servidor local. Vale procurar no painel antes de subir outro.
 
+### Pendências abertas com o GL (06/08, fim da tarde)
+
+- **Nutri: nome, CRN e foto.** O passo 03 já diz que a dieta é prescrita por
+  nutricionista. O bloco de credencial (foto + CRN) só entra quando ele mandar
+  os dados — número de registro profissional é dado conferível e não se
+  aproxima.
+- **Prints de depoimento na tela do notebook.** Ele vai anexar. Até lá a tela
+  fica coberta e apagada (o clip-path já está no lugar, em `Metodo`).
+- **Depoimento fidedigno das alunas.** O roteiro de perguntas está em
+  `PERGUNTAS-DEPOIMENTO.md`, na raiz. Ele decidiu deixar para o fim.
+
 ### As três coisas que faltam, em ordem
 
 **1. As histórias das duas alunas de baixo.** Elas aparecem na grade com foto e
@@ -144,13 +155,16 @@ existem no build local e não na produção.
 ### O que a página tem hoje
 
 1. **Hero** — "Você já sabe o que fazer. O que nunca teve foi alguém junto." +
-   foto do GL de frente, olhando para a câmera
+   a foto do microfone (trocada em 06/08 com a de camiseta branca, que desceu
+   para "quem vai te acompanhar" — pedido do GL: "inverter")
 2. **Prova** — "Corpo forte, bonito e funcional. Sem terrorismo." Grade 2×2:
    duas alunas com história (Maria Eduarda, Aluna GL), duas só com foto. Dentro
    do card da segunda, costas e perfil da mesma avaliação. O Léo fecha em texto.
    CTA no fim da seção, no pico do interesse.
 3. **Dores** — quatro, tiradas das opções do próprio quiz
-4. **Como funciona** — três passos + retrato do GL no evento
+4. **Como funciona** — SETE passos (reescrita em 06/08: o GL disse que estava
+   "muito vago e carente de informações do que realmente fazemos") + a foto dele
+   com o notebook, com a tela do Windows coberta
 5. **Quem é o Gabriel** — escrito a partir do texto que ELE mandou: o menino que
    achava que não se encaixava. A ponte é estrutural, não retórica: é a mesma
    insegurança da leitora que acha que não seria selecionada.
