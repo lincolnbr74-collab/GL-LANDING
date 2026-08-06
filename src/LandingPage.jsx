@@ -43,7 +43,14 @@ const SCREENS = [
     tag:"GL Consultoria",
     headline:["ANTES DE","COMEÇAR,","PRECISO TE","CONHECER."],
     accentLines:[1,3],
-    sub:"São 5 perguntas rápidas. Suas respostas definem se o acompanhamento da GL Team é o caminho certo pra você.",
+    // ERA "5 PERGUNTAS", E SÃO 7. Corrigido em 06/08, antes de publicar.
+    // A intro prometia cinco e o contador do topo mostrava 01/07 dois segundos
+    // depois — a primeira promessa da página quebrada no exato momento em que
+    // a pessoa aceita o compromisso. Ninguém desiste por causa de duas
+    // perguntas a mais; desiste porque percebeu que foi enganada na primeira
+    // frase. Se um dia o GL quiser cortar duas perguntas, o número volta a 5
+    // aqui e o TOTAL_STEPS acompanha.
+    sub:"São 7 perguntas rápidas. Suas respostas definem se o acompanhamento da GL Team é o caminho certo pra você.",
     cta:"Vamos lá", note:"Leva menos de 3 minutos",
   },
   { id:"genero", type:"gender",

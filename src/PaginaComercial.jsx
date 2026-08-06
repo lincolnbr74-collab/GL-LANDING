@@ -43,8 +43,12 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
  * tirar essa também: sozinha ela lia como resto de construção, e carregava a
  * mesma régua que a foto carregava. O texto está no histórico do git.
  *
- * Não há TEMPO em nenhum card: o GL não lembrava os prazos, e prazo inventado
- * é o tipo de número que ninguém confere e que quebra tudo se for descoberto.
+ * SOBRE PRAZO: a regra nasceu como "nenhum card tem tempo", porque o GL não
+ * lembrava os prazos e prazo inventado é o tipo de número que ninguém confere
+ * e que derruba tudo se for descoberto. Ela continua valendo para prazo que
+ * eu não ouvi dele. Os dois que existem hoje — "a diferença da foto é de um
+ * mês" e "procurou a GL em março" — vieram DELE, sobre alunas dele, e por isso
+ * ficam. Nenhum outro entra sem ele dizer.
  */
 export const PARES = [
   // ORDEM PENSADA PARA A ALTURA, 06/08 — o GL: "tem um espaço ali para duas
