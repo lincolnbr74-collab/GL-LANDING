@@ -17,7 +17,12 @@
 const C = {
   bg:"#0A0A0A", surface:"#111111", deep:"#14060A",
   red:"#E10A1F", redDark:"#B00818", redGlow:"rgba(225,10,31,0.15)",
-  text:"#FFFFFF", textSub:"#A0A0A0", textMuted:"#666666",
+  text:"#FFFFFF",
+  /* textRead: corpo de LEITURA. O textSub (#A0A0A0) nasceu para rótulo e
+     legenda; usado em parágrafo longo sobre near-black, o GL reclamou que não
+     dava para ler bem. Regra do GL SYSTEM: cinza só em rótulo. */
+  textRead:"#DADADA",
+  textSub:"#A0A0A0", textMuted:"#666666",
   border:"#1E1E1E", borderHover:"#333333",
 };
 const TYPE = {

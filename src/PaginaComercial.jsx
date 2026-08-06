@@ -263,7 +263,12 @@ function Prova({ onComecar }) {
                 </strong>
               )}
               {p.historia && (
-                <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.historia}</p>
+                <p style={{
+                  ...TYPE.body, fontSize: 17, lineHeight: 1.65,
+                  color: C.textRead, marginTop: SP[12],
+                }}>
+                  {p.historia}
+                </p>
               )}
               {p.angulos && (
                 <div style={{ marginTop: SP[16] }}>
@@ -436,14 +441,14 @@ function Metodo() {
             que continua depois da primeira semana.
           </p>
           <img
-            src="/prova/gl-escritorio.webp"
-            alt="Gabriel Lincoln trabalhando no escritório da GL Consultoria"
+            src="/prova/gl-frente.webp"
+            alt="Gabriel Lincoln, responsável pela GL Consultoria"
             loading="lazy"
             style={{
               // Proporção travada: o arquivo é retrato alto (1100x1956) e, solto,
               // esticava a coluna da esquerda muito além dos três passos —
               // sobrava um vazio enorme à direita.
-              width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 30%",
+              width: "100%", aspectRatio: "4 / 5", objectFit: "cover", objectPosition: "center 20%",
               marginTop: SP[32], display: "block",
               borderRadius: BR.lg, border: `1px solid ${C.border}`,
             }}
