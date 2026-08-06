@@ -605,14 +605,76 @@ function Metodo() {
                 width: "100%", height: "auto", display: "block",
               }}
             />
-            <div
+            {/* A TELA, agora com a marca em vez de retângulo preto (06/08).
+
+                O GL: "colocar a minha logo nela, alguma coisa em relação à
+                consultoria, não deixar a tela preta". Retângulo preto no meio
+                de uma foto clara lê como defeito — o olho procura conteúdo ali
+                e não acha nada.
+
+                É SVG e não HTML de propósito: o `viewBox` é o tamanho exato do
+                arquivo (1100x1375), então tudo que é desenhado aqui usa as
+                MESMAS coordenadas do polígono medido na foto, e escala junto
+                com a imagem em qualquer largura, sem media query nenhuma.
+
+                O que está na tela é a marca, não um print de produto: inventar
+                uma tela de app que não existe seria a página prometer uma coisa
+                e a consultoria entregar outra. Quando os prints de depoimento
+                que ele vai anexar chegarem, eles entram AQUI, no lugar da
+                marca — as coordenadas já estão prontas. */}
+            <svg
               aria-hidden="true"
-              style={{
-                position: "absolute", inset: 0,
-                clipPath: "polygon(46.2% 33.9%, 88.8% 34.2%, 88.6% 53.2%, 46.1% 52.7%)",
-                background: `linear-gradient(150deg, #16161c 0%, #0d0d11 55%, #08080a 100%)`,
-              }}
-            />
+              viewBox="0 0 1100 1375"
+              preserveAspectRatio="none"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+            >
+              <defs>
+                <linearGradient id="glTela" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#17171e" />
+                  <stop offset="55%" stopColor="#0d0d11" />
+                  <stop offset="100%" stopColor="#08080a" />
+                </linearGradient>
+                {/* Brilho vermelho fraco atrás da marca: sem ele a tela fica
+                    chapada e parece desligada, com o logotipo colado por cima. */}
+                <radialGradient id="glBrilho" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="#E10A1F" stopOpacity="0.30" />
+                  <stop offset="100%" stopColor="#E10A1F" stopOpacity="0" />
+                </radialGradient>
+                <clipPath id="glRecorteTela">
+                  {/* Os quatro cantos da tela, medidos no arquivo. O notebook
+                      está levemente inclinado — retângulo reto não encaixa. */}
+                  <polygon points="508,466 977,470 975,732 507,725" />
+                </clipPath>
+              </defs>
+
+              <g clipPath="url(#glRecorteTela)">
+                <rect x="500" y="460" width="490" height="280" fill="url(#glTela)" />
+                <ellipse cx="742" cy="598" rx="260" ry="150" fill="url(#glBrilho)" />
+                <text
+                  x="742" y="600"
+                  textAnchor="middle"
+                  fontFamily="'Anton', sans-serif"
+                  fontSize="104"
+                  fill="#FFFFFF"
+                  letterSpacing="6"
+                >
+                  GL
+                </text>
+                <text
+                  x="742" y="650"
+                  textAnchor="middle"
+                  fontFamily="'JetBrains Mono', monospace"
+                  fontSize="21"
+                  fill="#E10A1F"
+                  letterSpacing="7"
+                >
+                  CONSULTORIA
+                </text>
+                {/* Filete de brilho no topo do vidro: é o que faz a tela parecer
+                    ACESA em vez de um adesivo colado na foto. */}
+                <rect x="500" y="460" width="490" height="70" fill="#FFFFFF" opacity="0.03" />
+              </g>
+            </svg>
           </div>
         </div>
         <ol style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: SP[24] }}>
