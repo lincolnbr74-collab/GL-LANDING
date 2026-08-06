@@ -82,32 +82,94 @@ convida. **Nenhum texto pode sugerir que a pessoa precisa provar que merece.**
 
 ## Current Checkpoint
 
-**Última tarefa concluída** (06/08/2026)
-- `design.js` extraído, cópia morta do quiz removida, primeira dobra da página
-  comercial construída e conferida na tela (1440px e celular, zero rolagem
-  horizontal). Fluxo comercial → quiz testado por clique.
-- Está na branch **`pagina-comercial`**. A `main` segue intocada de propósito:
-  ela é o que a Vercel publica e a página ainda não tem fotos.
+> **Sessão reiniciada? Leia só esta seção.** Ela é o estado exato de 06/08/2026.
 
-**Próxima tarefa**
-- Seção 2: antes e depois. É a razão de a página existir.
+### Como retomar em 30 segundos
 
-**Bloqueado por**
-- **As fotos.** Sem par real, a seção não avança. Para cada par, além da imagem:
-  quanto tempo levou e o que mudou FORA do corpo (dormir, espelho, dor no
-  joelho) — é a segunda linha que gera identificação, não o corpo.
+```bash
+cd /Users/gabriellincoln/Desktop/GL-LANDING
+git branch --show-current      # tem de dizer: pagina-comercial
+PORT=3100 BROWSER=none npm start
+# abre http://localhost:3100  → deve aparecer a página comercial, não o quiz
+```
 
-**Seções ainda não construídas** (ordem acordada)
+O GL SYSTEM roda na 3000; esta LP usa a **3100** para os dois conviverem.
+
+### O que está pronto
+
+- `src/design.js` — cores/tipografia/espaçamento extraídos do quiz **sem mudar
+  um valor**. As duas páginas bebem daqui.
+- `src/PaginaComercial.jsx` — **dobra 1 apenas**. Título, subtítulo, CTA e um
+  espaço tracejado reservado para a foto de abertura.
+- `src/App.js` — abre na comercial; o CTA leva ao quiz na mesma URL.
+- `src/GLQualificacao.jsx` — **removido** (era cópia morta do quiz).
+- Conferido na tela em 1440px e 390px, zero rolagem horizontal, `npm run build`
+  compilando limpo.
+
+### Onde está o código
+
+Branch **`pagina-comercial`**, com dois commits locais. **Não foi feito push, e
+isso é de propósito:** a `main` é o que a Vercel publica, e a página ainda tem
+um buraco no lugar da foto. Não mandar para a `main` até a seção 2 existir.
+
+### A próxima tarefa é uma só
+
+**Seção 2 — antes e depois.** É a razão de a página existir.
+
+### O que trava (e é a única coisa que trava)
+
+**As fotos ainda não existem no projeto.** `public/` está vazio; a LP inteira é
+texto hoje.
+
+O GL vai colocá-las em **`public/prova/`**. Foto colada no chat o Claude
+**consegue ver, mas não consegue salvar** — para entrar no build, o arquivo tem
+de existir no disco. O chat serve para escolher qual par usar; a pasta serve
+para publicar.
+
+De cada par, além da imagem, faltam duas informações:
+- **quanto tempo levou** ("7 meses")
+- **o que mudou FORA do corpo** ("voltou a dormir", "parou de se esconder no
+  espelho", "treina sem dor no joelho")
+
+A segunda linha é o que gera identificação. Corpo bonito ela já viu mil no
+Instagram e ignorou.
+
+Quando as fotos chegarem, o lugar de escrevê-las é a constante `PARES`, no topo
+de `PaginaComercial.jsx` — já está comentada com o formato.
+
+### Por que não adiantamos as outras seções
+
+O GL perguntou se não seria melhor com as fotos primeiro. **Sim, e a decisão foi
+essa.** As fotos mudam o layout (vertical ou horizontal, com rosto ou sem, lado
+a lado ou sobreposto) e mudam o texto da seção "o que eu resolvo" — escrever as
+dores antes de ver quem são essas pessoas seria chute.
+
+### Seções ainda não construídas (ordem acordada)
+
 1. ~~Dobra 1 — o espelho, não o troféu~~ ✅
-2. Antes e depois ← bloqueada nas fotos
-3. O que eu resolvo (nas palavras do lead, tiradas das opções do próprio quiz)
+2. **Antes e depois** ← próxima, bloqueada nas fotos
+3. O que eu resolvo — nas palavras do lead, tiradas das opções do próprio quiz:
+   *"comecei e não mantive"*, *"me esforcei meses e não mudou quase nada"*,
+   *"nunca tive acompanhamento real"*, *"perdi e recuperei mais de uma vez"*
 4. Como funciona — protocolo individual, check-in semanal, ajuste
 5. Quem é o Gabriel — rosto, CREF, o porquê
 6. A entrada — o quiz apresentado como conversa, não como peneira
 
-**Decisões já tomadas, não reabrir**
-- A página **não fala preço**. Termina no quiz, e o quiz já pergunta sobre investimento.
-- Um único destino de clique: o quiz. Sem WhatsApp direto no meio, senão o lead
-  pula a qualificação.
-- Ângulo do título: a frustração de recomeçar ("Você já sabe o que fazer. O que
-  nunca teve foi alguém junto."), escolhido pelo GL em 06/08.
+### Decisões fechadas, não reabrir
+
+- A página **não fala preço**. Termina no quiz, e o quiz já pergunta sobre
+  investimento.
+- **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio, senão o
+  lead pula a qualificação.
+- **Ângulo do título:** a frustração de recomeçar — *"Você já sabe o que fazer.
+  O que nunca teve foi alguém junto."* Escolhido pelo GL entre quatro opções.
+- **O link da bio não muda.** A troca comercial → quiz é de estado, na mesma
+  URL, para não invalidar o que já está divulgado.
+
+### Antes de publicar (passo que ainda não foi feito)
+
+A nota do cofre *"8 passos para tirar a cara de IA de um site"* pede uma
+**autoauditoria com nota** antes de subir: hierarquia, performance, segurança,
+responsividade e confiança. Régua dela: acima de 50 aceitável, acima de 80 bom.
+Rodar isso quando a página estiver inteira, corrigir o que ela mesma apontar, e
+só então mandar para a `main`.
