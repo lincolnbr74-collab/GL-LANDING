@@ -60,15 +60,41 @@ export const PARES = [
     chamada: "Já tinha emagrecido. Faltava perder o medo",
     historia:
       "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
+    // Costas e perfil da MESMA avaliação. Ficam DENTRO do card de propósito:
+    // numa faixa separada, o rótulo "a aluna acima" fica ambíguo com dois
+    // cards em cima, e o leitor pode atribuir as fotos à pessoa errada.
+    angulos: [
+      { img: "/prova/aluna-costas.webp", alt: "A mesma aluna, vista de costas" },
+      { img: "/prova/aluna-lado.webp", alt: "A mesma aluna, vista de perfil" },
+    ],
+    notaAngulos: "Costas e perfil da mesma avaliação — é assim que se vê que não foi enquadramento favorável.",
   },
 ];
 
-/** Mais resultados, sem legenda. Imagem fala; texto inventado, não. */
-export const MAIS_RESULTADOS = [
-  { img: "/prova/aluna-perfil.webp", alt: "Antes e depois de aluna da GL Consultoria, vista de perfil" },
-  { img: "/prova/aluna-lado.webp", alt: "Antes e depois de aluna da GL Consultoria, vista lateral" },
-  { img: "/prova/aluna-costas.webp", alt: "Antes e depois de aluna da GL Consultoria, vista de costas" },
-];
+/**
+ * OUTROS ÂNGULOS DA MESMA ALUNA — e o rótulo diz isso com todas as letras.
+ *
+ * Erro que quase foi para o ar: estas duas fotos são a MESMA pessoa do segundo
+ * card (frente, costas e perfil da mesma avaliação). Numa faixa chamada "mais
+ * resultados", elas seriam lidas como duas alunas a mais. Isso é enganar por
+ * arranjo, sem escrever uma linha falsa — e continua sendo enganar.
+ *
+ * Nomeadas corretamente, elas ficam MAIS fortes: três ângulos da mesma
+ * transformação provam que não é enquadramento favorável.
+ */
+
+
+/**
+ * Uma aluna a mais, de quem o GL não contou a história.
+ *
+ * Fica em faixa PRÓPRIA, e não junto dos ângulos acima, porque juntar as duas
+ * coisas faria três imagens parecerem três pessoas — quando duas são a mesma.
+ * Enganar por arranjo é enganar.
+ */
+export const OUTRA_ALUNA = {
+  img: "/prova/aluna-perfil.webp",
+  alt: "Antes e depois de outra aluna da GL Consultoria",
+};
 
 function Ticker() {
   const items = [
@@ -201,7 +227,7 @@ function Hero({ onComecar }) {
    rolando. Animação aqui também cansaria. O ritmo é alternar — é o melhor
    achado da nota "8 passos para tirar a cara de IA de um site".
 ───────────────────────────────────────── */
-function Prova() {
+function Prova({ onComecar }) {
   return (
     <section style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[32]}px ${SP[24]}px ${SP[64]}px` }}>
       <h2 style={{ ...TYPE.displayLG, maxWidth: 760 }}>
@@ -228,39 +254,72 @@ function Prova() {
               <span style={{ ...TYPE.monoSM, color: C.red, letterSpacing: "2px", textTransform: "uppercase", display: "block" }}>
                 {p.nome}
               </span>
-              <strong style={{
-                display: "block", marginTop: 6, color: C.text,
-                fontFamily: "'Inter',sans-serif", fontSize: 19, fontWeight: 600, lineHeight: 1.35,
-              }}>
-                {p.chamada}
-              </strong>
-              <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.historia}</p>
+              {p.chamada && (
+                <strong style={{
+                  display: "block", marginTop: 6, color: C.text,
+                  fontFamily: "'Inter',sans-serif", fontSize: 19, fontWeight: 600, lineHeight: 1.35,
+                }}>
+                  {p.chamada}
+                </strong>
+              )}
+              {p.historia && (
+                <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.historia}</p>
+              )}
+              {p.angulos && (
+                <div style={{ marginTop: SP[16] }}>
+                  <div className="gl-prova-faixa">
+                    {p.angulos.map((a) => (
+                      <img
+                        key={a.img}
+                        src={a.img}
+                        alt={a.alt}
+                        loading="lazy"
+                        style={{
+                          width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
+                          display: "block", borderRadius: BR.md, border: `1px solid ${C.border}`,
+                        }}
+                      />
+                    ))}
+                  </div>
+                  <p style={{ ...TYPE.caption, color: C.textMuted, marginTop: SP[8] }}>{p.notaAngulos}</p>
+                </div>
+              )}
             </figcaption>
           </figure>
         ))}
       </div>
 
-      {/* Faixa sem legenda: acrescenta VOLUME de prova sem acrescentar
-          afirmação. É o jeito honesto de mostrar que não são dois casos
-          isolados quando não se tem a história de cada um. */}
+      {/* Faixa própria, com rótulo que diz que é OUTRA pessoa. */}
       <div style={{ marginTop: SP[48] }}>
         <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "2px", textTransform: "uppercase" }}>
-          Mais resultados
+          Outra aluna
         </span>
-        <div className="gl-prova-faixa" style={{ marginTop: SP[16] }}>
-          {MAIS_RESULTADOS.map((r) => (
-            <img
-              key={r.img}
-              src={r.img}
-              alt={r.alt}
-              loading="lazy"
-              style={{
-                width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
-                display: "block", borderRadius: BR.md, border: `1px solid ${C.border}`,
-              }}
-            />
-          ))}
-        </div>
+        <img
+          src={OUTRA_ALUNA.img}
+          alt={OUTRA_ALUNA.alt}
+          loading="lazy"
+          style={{
+            width: "100%", maxWidth: 620, marginTop: SP[16], display: "block",
+            borderRadius: BR.md, border: `1px solid ${C.border}`,
+          }}
+        />
+      </div>
+
+      {/* CHAMADA NO PICO. A página tem ~5.300px e tinha só dois botões, topo e
+          fim: quem se convencia olhando as transformações precisava rolar mais
+          três seções para poder agir. Este pega a pessoa no momento em que a
+          prova acabou de fazer efeito. */}
+      <div style={{ marginTop: SP[48], display: "flex", flexWrap: "wrap", alignItems: "center", gap: SP[16] }}>
+        <button className="btn-primary" onClick={onComecar} style={{
+          background: C.red, color: "#fff", border: "none", cursor: "pointer",
+          borderRadius: BR.full, padding: "16px 30px",
+          fontFamily: "'Inter',sans-serif", fontSize: 16, fontWeight: 600,
+        }}>
+          Quero começar assim também →
+        </button>
+        <span style={{ ...TYPE.monoSM, color: C.textMuted, letterSpacing: "1px" }}>
+          5 minutos · sem compromisso
+        </span>
       </div>
 
       {/* O Léo fecha a seção em TEXTO. A história é real e mostra o alcance do
@@ -509,7 +568,7 @@ export default function PaginaComercial({ onComecar }) {
       <style>{CSS_COMERCIAL}</style>
       <Ticker />
       <Hero onComecar={onComecar} />
-      <Prova />
+      <Prova onComecar={onComecar} />
       <Dores />
       <Metodo />
       <Quem />

@@ -109,22 +109,31 @@ export const CSS_COMERCIAL = `
      não virar miniatura ilegível. */
   .gl-prova-grade {
     display: grid;
-    gap: 32px;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  @media (max-width: 900px) {
+  /* Mesmo raciocínio das dores: em coluna única, três fotos quadradas
+     empilhadas levavam a página de 5.000px (desktop) para 9.500px no iPad em
+     pé. Duas colunas no tablet, uma só no celular. */
+  @media (max-width: 640px) {
     .gl-prova-grade { grid-template-columns: 1fr; gap: 40px; }
   }
   /* Faixa de resultados: menor que os cards com história, de propósito — o
      peso visual segue a hierarquia do conteúdo. */
-  .gl-prova-faixa { display: grid; gap: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .gl-prova-faixa { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   @media (max-width: 640px) {
     .gl-prova-faixa { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
+  /* Duas colunas já no tablet. Entre 768 e 1023 tudo virava uma coluna só, e
+     quatro cards empilhados esticavam demais a página no iPad em pé. */
   .gl-dores { display: grid; gap: 20px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .gl-metodo { display: grid; gap: 48px; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; }
   .gl-quem { display: grid; gap: 48px; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); align-items: center; }
   @media (max-width: 900px) {
-    .gl-dores, .gl-metodo, .gl-quem { grid-template-columns: 1fr; gap: 32px; }
+    .gl-metodo, .gl-quem { grid-template-columns: 1fr; gap: 32px; }
+  }
+  /* As dores só colapsam no celular de verdade. */
+  @media (max-width: 640px) {
+    .gl-dores { grid-template-columns: 1fr; }
   }
 `;
