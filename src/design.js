@@ -105,4 +105,14 @@ export const CSS_COMERCIAL = `
   @media (max-width: 860px) {
     .gl-hero { grid-template-columns: 1fr !important; }
   }
+  /* Três provas lado a lado no desktop; uma por vez no celular, para a foto
+     não virar miniatura ilegível. */
+  .gl-prova-grade {
+    display: grid;
+    gap: 32px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (max-width: 900px) {
+    .gl-prova-grade { grid-template-columns: 1fr; gap: 40px; }
+  }
 `;

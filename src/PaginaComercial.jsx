@@ -37,13 +37,32 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
    coisa e a consultoria entregaria outra.
 ───────────────────────────────────────── */
 export const PARES = [
-  // {
-  //   antes: "/prova/nome-antes.jpg",
-  //   depois: "/prova/nome-depois.jpg",
-  //   nome: "Primeiro nome",
-  //   tempo: "7 meses",
-  //   alem: "Voltou a treinar sem dor no joelho e parou de pular o café da manhã.",
-  // },
+  {
+    img: "/prova/maria-eduarda.webp",
+    nome: "Maria Eduarda",
+    // A dor dela é a dor de quem tem agenda mandando na vida — a ponte mais
+    // direta com o posicionamento de "treinador de empresário".
+    chamada: "A rotina nunca deixava treinar",
+    historia:
+      "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
+  },
+  {
+    img: "/prova/aluna-frente.webp",
+    nome: "Aluna GL",
+    chamada: "Já tinha emagrecido. Faltava perder o medo",
+    historia:
+      "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
+  },
+  {
+    img: "/prova/leo.webp",
+    nome: "Léo",
+    chamada: "Procurou querendo competir",
+    // Moldura obrigatória. Sem o "procurou querendo competir", o palco e os
+    // troféus dizem "isso é para atleta" — e afastam exatamente quem a página
+    // quer acolher. Com ela, o Léo vira teto, não régua.
+    historia:
+      "Bicampeão overall do Men's Physique, com vários destaques no caminho. O objetivo era dele; o método é o mesmo.",
+  },
 ];
 
 function Ticker() {
@@ -163,6 +182,69 @@ function Hero({ onComecar }) {
   );
 }
 
+
+/* ─────────────────────────────────────────
+   DOBRA 2 — a prova
+
+   O título é a tese do GL, nas palavras dele: "corpo forte, bonito e
+   funcional SEM TERRORISMO". Ela nomeia o inimigo (a restrição como régua)
+   sem atacar ninguém — e as três histórias são a mesma tese em três
+   contextos: uma venceu o medo de comer, outra venceu a rotina impossível,
+   o terceiro foi até o palco porque quis.
+
+   Seção QUIETA de propósito: a dobra 1 tem movimento de entrada e o ticker
+   rolando. Animação aqui também cansaria. O ritmo é alternar — é o melhor
+   achado da nota "8 passos para tirar a cara de IA de um site".
+───────────────────────────────────────── */
+function Prova() {
+  return (
+    <section style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[32]}px ${SP[24]}px ${SP[64]}px` }}>
+      <h2 style={{ ...TYPE.displayLG, maxWidth: 720 }}>
+        CORPO FORTE, BONITO E FUNCIONAL.
+        <span style={{ color: C.red }}> SEM TERRORISMO.</span>
+      </h2>
+      <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16], maxWidth: 560 }}>
+        Três pessoas, três pontos de partida diferentes. Nenhuma delas passou fome
+        para chegar aqui.
+      </p>
+
+      <div className="gl-prova-grade" style={{ marginTop: SP[48] }}>
+        {PARES.map((p) => (
+          <figure key={p.nome} style={{ margin: 0 }}>
+            <img
+              src={p.img}
+              alt={`Antes e depois de ${p.nome}`}
+              loading="lazy"
+              style={{
+                // Proporção FIXA nas três: os arquivos vêm com alturas
+                // diferentes (973 e 1000 px) e sem isto as legendas começam em
+                // linhas diferentes, o que faz a grade parecer desalinhada.
+                width: "100%", aspectRatio: "1 / 1", objectFit: "cover",
+                display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
+              }}
+            />
+            <figcaption style={{ marginTop: SP[16] }}>
+              <span style={{
+                ...TYPE.monoSM, color: C.red, letterSpacing: "2px",
+                textTransform: "uppercase", display: "block",
+              }}>
+                {p.nome}
+              </span>
+              <strong style={{
+                display: "block", marginTop: 6, color: C.text,
+                fontFamily: "'Inter',sans-serif", fontSize: 17, fontWeight: 600, lineHeight: 1.35,
+              }}>
+                {p.chamada}
+              </strong>
+              <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.historia}</p>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export default function PaginaComercial({ onComecar }) {
   return (
     <div style={{ minHeight: "100%", background: C.bg, color: C.text }}>
@@ -174,6 +256,7 @@ export default function PaginaComercial({ onComecar }) {
       <style>{CSS_COMERCIAL}</style>
       <Ticker />
       <Hero onComecar={onComecar} />
+      <Prova />
     </div>
   );
 }
