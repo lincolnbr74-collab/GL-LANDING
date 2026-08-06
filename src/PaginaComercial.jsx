@@ -488,13 +488,20 @@ const PASSOS = [
   },
   {
     n: "03",
-    // O CRN e a foto do nutri ficam de fora ATÉ o GL mandar os dados (pedido
-    // dele em 06/08: "podendo adicionar a foto e o CRN do nutri"). Número de
-    // registro profissional é dado conferível: inventar ou aproximar aqui é
-    // pior do que não ter. Quando ele mandar nome + CRN + foto, isto vira um
-    // bloco de credencial ao lado do passo.
     titulo: "A dieta é prescrita por nutricionista",
     texto: "Quem prescreve a sua dieta é nutricionista com registro, não um treinador chutando caloria. Com substituição pronta para o dia em que a comida do plano não existe.",
+    // O GL mandou foto e CRN em 06/08. Nome e número saíram do PDF de
+    // assinatura dele (`public/prova/CRN Rogério Nutri.pdf`), copiados letra
+    // por letra — registro profissional é dado conferível e não se aproxima.
+    //
+    // O rosto vale mais que a frase: "prescrita por nutricionista" é o que toda
+    // consultoria escreve. Com nome, cara e número, vira coisa que a leitora
+    // pode conferir no site do CRN — e é exatamente esse o efeito.
+    credencial: {
+      foto: "/prova/nutri-rogerio.webp",
+      nome: "Rogério do Nascimento",
+      registro: "Nutricionista · CRN 11679",
+    },
   },
   {
     n: "04",
@@ -591,6 +598,44 @@ function Metodo() {
                   {p.titulo}
                 </strong>
                 <p style={{ ...TYPE.bodyRead, color: C.textSub, marginTop: SP[12] }}>{p.texto}</p>
+                {/* CREDENCIAL — só o passo do nutri tem. Fica dentro do passo,
+                    e não numa seção própria: solta, ela viraria "conheça a
+                    equipe" e roubaria o assunto da dobra, que é o que a pessoa
+                    recebe. */}
+                {p.credencial && (
+                  <div style={{
+                    display: "flex", alignItems: "center", gap: SP[12],
+                    marginTop: SP[16], padding: SP[12],
+                    background: C.bg, border: `1px solid ${C.border}`, borderRadius: BR.md,
+                  }}>
+                    <img
+                      src={p.credencial.foto}
+                      alt={`${p.credencial.nome}, nutricionista da GL Consultoria`}
+                      loading="lazy"
+                      width={56}
+                      height={56}
+                      style={{
+                        width: 56, height: 56, flexShrink: 0, objectFit: "cover",
+                        borderRadius: "50%", border: `1px solid ${C.borderHover}`,
+                        display: "block",
+                      }}
+                    />
+                    <div>
+                      <strong style={{
+                        display: "block", color: C.text, fontFamily: "'Inter',sans-serif",
+                        fontSize: 15, fontWeight: 600, lineHeight: 1.3,
+                      }}>
+                        {p.credencial.nome}
+                      </strong>
+                      <span style={{
+                        ...TYPE.monoSM, display: "block", marginTop: 4,
+                        color: C.textMuted, letterSpacing: "1px",
+                      }}>
+                        {p.credencial.registro}
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
             </li>
           ))}
