@@ -100,18 +100,40 @@ export const PARES = [
     historia: null,
   },
   {
-    img: "/prova/aluna-perfil.webp",
+    // FOTO REFEITA DO ORIGINAL em 06/08. O GL abriu a página e disse: "a foto
+    // lateral corta o glúteo dela". Estava certo, e a causa não era o CSS —
+    // era o arquivo. O `aluna-perfil.webp` que estava aqui tinha 1000x540,
+    // metade da altura de qualquer outra foto de prova: o corte que tirou o
+    // rosto levou o glúteo junto, nos dois lados. O original inteiro sempre
+    // esteve na pasta (`48F00866…JPG`, 2048x2048). Recortado de novo logo
+    // abaixo do queixo: some o rosto, fica o corpo inteiro.
+    //
+    // Por que importa: numa lateral de antes e depois, o glúteo É a
+    // comparação. Cortar ali é publicar a prova sem a parte que prova.
+    img: "/prova/maria-eduarda-lateral.webp",
     // É ELA, confirmado pelo GL em 06/08 apontando este card: "essa é a Maria
     // Eduarda". Sem história ainda — card com foto e nome é honesto; frase
     // inventada sobre pessoa real, não.
     nome: "Maria Eduarda",
     chamada: null,
     historia: null,
-    // Proporção PRÓPRIA. O corte que tirou o rosto deixou a foto larga
-    // (1000x540); forçada em quadrado, o `cover` comia as laterais e
-    // destruía os dois lados da comparação. Antes e depois cortado ao meio
-    // não é prova de nada.
-    proporcao: "50 / 27",
+    // Proporção do arquivo (1000x746).
+    proporcao: "500 / 373",
+    // A FOTO DA PISCINA, pedida pelo GL em 06/08: "é a mesma aluna do topper
+    // preto, gostaria que colocasse também". Fica DENTRO do card dela, pelo
+    // mesmo motivo do segundo card: solta, seria lida como mais uma aluna.
+    //
+    // O rosto saiu, cortado no pescoço. Era a única foto do conjunto com rosto
+    // visível nos dois lados, e "nenhum rosto identificável" é decisão fechada
+    // da página. Se o GL quiser com rosto, é trocar o arquivo — o original
+    // está em `470c2dd0….jpeg`.
+    angulos: [
+      {
+        img: "/prova/maria-eduarda-piscina.webp",
+        alt: "A mesma aluna, de corpo inteiro, antes e depois",
+      },
+    ],
+    notaAngulos: "A mesma aluna, de frente — antes e depois da mesma jornada.",
   },
 ];
 
@@ -308,7 +330,15 @@ function Prova({ onComecar }) {
               )}
               {p.angulos && (
                 <div style={{ marginTop: SP[16] }}>
-                  <div className="gl-prova-faixa">
+                  {/* A faixa nasceu com DUAS colunas fixas (costas + perfil da
+                      mesma avaliação). Com uma foto só — o caso da piscina da
+                      Maria Eduarda — ela ficava espremida em meia largura, com
+                      um buraco do lado. O número de colunas passa a seguir o
+                      número de fotos. */}
+                  <div
+                    className="gl-prova-faixa"
+                    style={p.angulos.length === 1 ? { gridTemplateColumns: "minmax(0, 1fr)" } : undefined}
+                  >
                     {p.angulos.map((a) => (
                       <img
                         key={a.img}
