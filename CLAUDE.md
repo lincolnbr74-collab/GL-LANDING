@@ -112,14 +112,36 @@ PORT=3100 BROWSER=none npm start     # abre http://localhost:3100
 A Vercel deve ter gerado um **preview** dessa branch — serve para o GL abrir no
 celular sem servidor local. Vale procurar no painel antes de subir outro.
 
+### Onde ficam os originais (regra nova, 06/08)
+
+`public/` é público: **tudo** que está lá vai para o build e para a internet,
+inclusive o que a página não usa. Estavam indo para o ar os originais com nome
+de aluna no arquivo. Agora:
+
+| Pasta | O que é |
+|---|---|
+| `fontes-privadas/` | originais (JPG/HEIC/PDF). Fora do build, fora do git |
+| `public/prova/` | só os `.webp` da página, com **nome neutro** |
+
+Nome de arquivo é endereço público: `/prova/fulana-de-tal.webp` nomeia a aluna
+mesmo com o card escrito "Aluna GL".
+
+**Quem é quem** (pelos nomes que o GL deu aos arquivos — **confirmar com ele
+antes de qualquer nome ir para um card**):
+
+| Arquivo na página | Aluna |
+|---|---|
+| `aluna-cortina.webp` | Hemanoelly Vieira |
+| `aluna-frente/costas/lado.webp` | Isis Otoni |
+| `aluna-lateral.webp` | Giovanna Caires |
+| `maria-eduarda-*.webp` | Maria Eduarda (confirmada por ele) |
+
 ### Pendências abertas com o GL (06/08, fim da tarde)
 
-- **Nutri: nome, CRN e foto.** O passo 03 já diz que a dieta é prescrita por
-  nutricionista. O bloco de credencial (foto + CRN) só entra quando ele mandar
-  os dados — número de registro profissional é dado conferível e não se
-  aproxima.
 - **Prints de depoimento na tela do notebook.** Ele vai anexar. Até lá a tela
   fica coberta e apagada (o clip-path já está no lugar, em `Metodo`).
+- **Nome nos cards das alunas** — depende de confirmação dele e de autorização
+  delas. Ver a tabela acima.
 - **Depoimento fidedigno das alunas.** O roteiro de perguntas está em
   `PERGUNTAS-DEPOIMENTO.md`, na raiz. Ele decidiu deixar para o fim.
 
