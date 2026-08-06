@@ -58,11 +58,9 @@ export const PARES = [
     // dizer de quem é a foto. O arquivo foi renomeado pelo mesmo motivo:
     // `maria-eduarda.webp` afirmava a identidade errada no próprio nome.
     nome: "Aluna GL",
-    // Proporção do arquivo (1080x1050). Antes eu tinha cortado 14% do topo
-    // "por segurança" e o quadrado do card comeu o resto — a foto aparecia do
-    // quadril para baixo. O original não tem rosto: ela está de costas para a
-    // câmera nos dois lados. Corte desnecessário, desfeito.
-    proporcao: "1080 / 1050",
+    // O original não tem rosto: ela está de costas para a câmera nos dois
+    // lados. Já foi recortada "por segurança" uma vez, e o corte comia metade
+    // do corpo — desfeito em 06/08.
     // A HISTÓRIA FICOU, mas o dono dela está em aberto: ela pode ter sido
     // contada sobre a Maria Eduarda e colada na foto errada junto com o nome.
     // Sem nome no card, ela não atribui nada a ninguém identificável — que é o
@@ -74,9 +72,6 @@ export const PARES = [
   {
     img: "/prova/aluna-frente.webp",
     nome: "Aluna GL",
-    // Proporção do arquivo (1000x840), pelo mesmo motivo da Maria: forçada em
-    // quadrado, o `cover` comia parte do antes e depois.
-    proporcao: "1000 / 840",
     chamada: "Já tinha emagrecido. Faltava perder o medo",
     historia:
       "Ex-obesa, ela já tinha perdido o peso. O que não tinha perdido era o medo: de comer, da balança, do que sobrou no espelho. Chegou pensando em cirurgia estética. Ficou quando descobriu que dava para construir corpo comendo — não deixando de comer.",
@@ -117,8 +112,6 @@ export const PARES = [
     nome: "Maria Eduarda",
     chamada: null,
     historia: null,
-    // Proporção do arquivo (1000x746).
-    proporcao: "500 / 373",
     // A FOTO DA PISCINA, pedida pelo GL em 06/08: "é a mesma aluna do topper
     // preto, gostaria que colocasse também". Fica DENTRO do card dela, pelo
     // mesmo motivo do segundo card: solta, seria lida como mais uma aluna.
@@ -222,7 +215,7 @@ function Hero({ onComecar }) {
         </h1>
 
         <p className="anim-sub" style={{
-          ...TYPE.body, color: C.textSub, marginTop: SP[24], maxWidth: 460,
+          ...TYPE.lead, color: C.textRead, marginTop: SP[24], maxWidth: 520,
         }}>
           Não é falta de informação — você já ouviu de tudo. É que ninguém montou
           um plano para a <strong style={{ color: C.text, fontWeight: 600 }}>sua</strong> rotina
@@ -233,7 +226,7 @@ function Hero({ onComecar }) {
           <button className="btn-primary" onClick={onComecar} style={{
             background: C.red, color: "#fff", border: "none", cursor: "pointer",
             borderRadius: BR.full, padding: "18px 34px",
-            fontFamily: "'Inter',sans-serif", fontSize: 16, fontWeight: 600,
+            fontFamily: "'Inter',sans-serif", fontSize: 17, fontWeight: 600,
           }}>
             Quero um plano pra mim →
           </button>
@@ -291,39 +284,38 @@ function Prova({ onComecar }) {
         CORPO FORTE, BONITO E FUNCIONAL.
         <span style={{ color: C.red }}> SEM TERRORISMO.</span>
       </h2>
-      <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16], maxWidth: 560 }}>
+      <p style={{ ...TYPE.lead, color: C.textSub, marginTop: SP[16], maxWidth: 620 }}>
         Pontos de partida diferentes. Nenhuma delas passou fome para chegar aqui.
       </p>
 
       <div className="gl-prova-grade" style={{ marginTop: SP[48] }}>
         {PARES.map((p) => (
-          <figure key={p.img} style={{ margin: 0, alignSelf: "start" }}>
-            <img
-              src={p.img}
-              alt={`Antes e depois de ${p.nome}`}
-              loading="lazy"
-              style={{
-                width: "100%", aspectRatio: p.proporcao || "1 / 1", objectFit: "cover",
-                display: "block", borderRadius: BR.lg, border: `1px solid ${C.border}`,
-                alignSelf: "start",
-              }}
-            />
+          <figure key={p.img} className="gl-prova-card" style={{ margin: 0 }}>
+            {/* A foto vive DENTRO de uma caixa de altura fixa, contida e nunca
+                recortada (ver `.gl-foto-caixa` no design.js). É o que alinha os
+                nomes dos quatro cards na mesma linha sem cortar prova nenhuma. */}
+            <div className="gl-foto-caixa">
+              <img
+                src={p.img}
+                alt={`Antes e depois de ${p.nome}`}
+                loading="lazy"
+              />
+            </div>
             <figcaption style={{ marginTop: SP[16] }}>
               <span style={{ ...TYPE.monoSM, color: C.red, letterSpacing: "2px", textTransform: "uppercase", display: "block" }}>
                 {p.nome}
               </span>
               {p.chamada && (
                 <strong style={{
-                  display: "block", marginTop: 6, color: C.text,
-                  fontFamily: "'Inter',sans-serif", fontSize: 19, fontWeight: 600, lineHeight: 1.35,
+                  ...TYPE.cardTitle,
+                  display: "block", marginTop: SP[8], color: C.text,
                 }}>
                   {p.chamada}
                 </strong>
               )}
               {p.historia && (
                 <p style={{
-                  ...TYPE.body, fontSize: 17, lineHeight: 1.65,
-                  color: C.textRead, marginTop: SP[12],
+                  ...TYPE.bodyRead, color: C.textRead, marginTop: SP[12],
                 }}>
                   {p.historia}
                 </p>
@@ -436,12 +428,12 @@ function Dores() {
                 {String(i + 1).padStart(2, "0")}
               </span>
               <strong style={{
+                ...TYPE.cardTitle,
                 display: "block", marginTop: SP[12], color: C.text,
-                fontFamily: "'Inter',sans-serif", fontSize: 18, fontWeight: 600, lineHeight: 1.35,
               }}>
                 {d.titulo}
               </strong>
-              <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{d.texto}</p>
+              <p style={{ ...TYPE.bodyRead, color: C.textSub, marginTop: SP[12] }}>{d.texto}</p>
             </div>
           ))}
         </div>
@@ -483,7 +475,7 @@ function Metodo() {
           <h2 style={{ ...TYPE.displayLG }}>
             COMO FUNCIONA
           </h2>
-          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16], maxWidth: 420 }}>
+          <p style={{ ...TYPE.lead, color: C.textSub, marginTop: SP[16], maxWidth: 460 }}>
             Sem fórmula fechada e sem dieta de gaveta. O que existe é um processo
             que continua depois da primeira semana.
           </p>
@@ -513,11 +505,11 @@ function Metodo() {
               <div>
                 <strong style={{
                   display: "block", color: C.text, fontFamily: "'Inter',sans-serif",
-                  fontSize: 19, fontWeight: 600, lineHeight: 1.35,
+                  ...TYPE.cardTitle,
                 }}>
                   {p.titulo}
                 </strong>
-                <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[8] }}>{p.texto}</p>
+                <p style={{ ...TYPE.bodyRead, color: C.textSub, marginTop: SP[12] }}>{p.texto}</p>
               </div>
             </li>
           ))}
@@ -562,11 +554,11 @@ function Quem() {
             comove, mas porque explica por que esta consultoria não exige que
             ninguém se encaixe em nada.
           */}
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+          <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             Eu fui o menino que tinha medo. Que se sentia estranho, que achava que
             não se encaixava.
           </p>
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+          <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             Demorei para entender que aquilo não era fraqueza. Era fase, era
             construção — e ninguém me disse isso na época.
           </p>
@@ -592,22 +584,22 @@ function Quem() {
             "isto é para atleta, não é para mim" na leitora que a página existe
             para acolher. Sem essa segunda frase, eu não colocaria a primeira.
           */}
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+          <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             Sou formado em Educação Física e fui atleta de fisiculturismo. Faço
             isso há mais de dez anos. Já acompanhei mais de 300 pessoas, em seis
             países, e o que trava é quase sempre a mesma coisa: ninguém do lado.
           </p>
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+          <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             O fisiculturismo me ensinou o método. Não é o que eu vendo — quase
             ninguém que eu atendo quer subir num palco.
           </p>
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+          <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             É por isso que aqui você não precisa se encaixar em nada. Nem em dieta
             impossível, nem em rotina de atleta, nem num padrão que outra pessoa
             inventou. Você não precisa ser a mais disciplinada do mundo — precisa
             ser comprometida com o seu próprio processo.
           </p>
-          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
+          <p style={{ ...TYPE.bodyRead, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
             O meu trabalho é ficar do seu lado enquanto isso acontece.
           </p>
         </div>
@@ -632,11 +624,11 @@ function Entrada({ onComecar }) {
         O PRÓXIMO PASSO É
         <span style={{ color: C.red }}> UMA CONVERSA.</span>
       </h2>
-      <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[24] }}>
+      <p style={{ ...TYPE.lead, color: C.textRead, marginTop: SP[24] }}>
         São cinco minutos de perguntas para eu entender a sua rotina, o seu
         histórico e o que já não funcionou. Não é teste e não tem resposta certa.
       </p>
-      <p style={{ ...TYPE.body, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
+      <p style={{ ...TYPE.lead, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
         Se eu não for o caminho certo pra você, eu te digo — e te aponto o que eu faria no seu lugar.
       </p>
       <div style={{ marginTop: SP[32], display: "flex", flexDirection: "column", alignItems: "center", gap: SP[12] }}>

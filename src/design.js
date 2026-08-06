@@ -32,6 +32,29 @@ const TYPE = {
   body:      { fontFamily:"'Inter',sans-serif", fontSize:"clamp(14px,3.5vw,16px)", lineHeight:1.6, fontWeight:400 },
   caption:   { fontFamily:"'Inter',sans-serif", fontSize:"clamp(13px,3vw,14px)", lineHeight:1.5, fontWeight:400 },
   monoSM:    { fontFamily:"'JetBrains Mono',monospace", fontSize:"clamp(10px,2.5vw,13px)", lineHeight:1.4, fontWeight:400 },
+
+  /* ─── TRÊS TOKENS NOVOS (06/08), da queixa do GL: "não tá legal a
+     tipografia, pequena, pouco visual".
+
+     A página comercial tinha UM tamanho de texto para tudo: corpo em 17px e
+     título de card em 19px. Dois pixels de diferença não é hierarquia — o olho
+     não distingue, e o resultado é uma parede cinza uniforme que não diz por
+     onde começar a ler. Numa página de venda, hierarquia é o que faz a pessoa
+     descer: ela lê os títulos, se interessa, e SÓ ENTÃO volta para o corpo.
+
+     A escala agora tem passos que se veem: 25 → 21 → 19 → 15 no desktop.
+
+     `body` e `caption` NÃO foram tocados de propósito: eles são compartilhados
+     com o quiz, que está pronto e no ar. Token novo é aditivo; mexer nos
+     existentes mudaria uma página que ninguém pediu para mudar. */
+
+  /* Subtítulo de dobra — a frase logo abaixo do título grande. */
+  lead:      { fontFamily:"'Inter',sans-serif", fontSize:"clamp(17px,4.5vw,21px)", lineHeight:1.55, fontWeight:400 },
+  /* Corpo de LEITURA longa (história de aluna, texto do GL). */
+  bodyRead:  { fontFamily:"'Inter',sans-serif", fontSize:"clamp(16px,4vw,19px)", lineHeight:1.7, fontWeight:400 },
+  /* Título dentro de card. Inter, não Anton: Anton é caixa-alta e gritaria
+     em quatro cards seguidos. O salto vem do TAMANHO e do peso. */
+  cardTitle: { fontFamily:"'Inter',sans-serif", fontSize:"clamp(19px,5vw,25px)", lineHeight:1.25, fontWeight:600, letterSpacing:"-0.2px" },
 };
 const SP = { 8:8,12:12,16:16,24:24,32:32,48:48,64:64,80:80 };
 const BR = { sm:6, md:12, lg:16, xl:24, full:999 };
@@ -123,6 +146,48 @@ export const CSS_COMERCIAL = `
   @media (max-width: 640px) {
     .gl-prova-grade { grid-template-columns: 1fr; gap: 40px; }
   }
+  /* CAIXA DA FOTO DE PROVA (06/08) — da queixa do GL: "fotos e relatos
+     desalinhados".
+
+     Cada antes e depois tem proporção própria (1.00, 1.03, 1.19, 1.34), e a
+     regra da página é que NENHUM pode ser recortado: numa lateral, o glúteo é
+     a comparação; num de frente, a cintura. Só que altura diferente em cada
+     foto faz a legenda de cada card começar numa altura diferente — quatro
+     nomes desalinhados, e a grade lê como coisa jogada.
+
+     A saída não é recortar: é uma CAIXA de altura igual, com a foto contida
+     dentro, nunca esticada. Sobra faixa nas laterais das fotos mais
+     quadradas — e ela é assumida, com o fundo de superfície e a borda do
+     sistema, virando moldura em vez de buraco.
+
+     5/4 e não 4/3: é a razão que fica no meio das quatro fotos, então a sobra
+     se divide em vez de castigar sempre a mesma. */
+  .gl-foto-caixa {
+    aspect-ratio: 5 / 4;
+    background: #111111;
+    border: 1px solid #1E1E1E;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* A foto NAO estica: ela cresce ate bater na parede mais proxima da caixa e
+     para. Limite maximo com largura e altura automaticas garante isso sem
+     depender de object-fit — a imagem nunca e redimensionada a forca, entao
+     nao existe corte possivel.
+     (Sem crase nenhuma neste comentario: ele vive dentro de um template
+     literal de JS, e uma crase solta aqui encerra a string e quebra o build.
+     Aconteceu em 06/08.) */
+  .gl-foto-caixa img {
+    max-width: 100%; max-height: 100%;
+    width: auto; height: auto;
+    display: block;
+  }
+  /* Cada card é uma coluna com a legenda começando logo abaixo da caixa. Como
+     as caixas têm a MESMA altura, os nomes saem na mesma linha. */
+  .gl-prova-card { display: flex; flex-direction: column; }
+
   /* Faixa de resultados: menor que os cards com história, de propósito — o
      peso visual segue a hierarquia do conteúdo. */
   .gl-prova-faixa { display: grid; gap: 12px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
