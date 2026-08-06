@@ -502,16 +502,31 @@ function Quem() {
             Quem vai te acompanhar
           </span>
           <h2 style={{ ...TYPE.displayMD, marginTop: SP[12] }}>GABRIEL LINCOLN</h2>
-          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16] }}>
-            Eu não vendo treino e dieta. Isso é o material — qualquer um entrega.
-            O que eu faço é ficar junto no meio do caminho, que é onde as coisas
-            costumam desandar: a semana que virou, a viagem, o mês em que nada saiu
-            como o planejado.
+
+          {/*
+            Escrito a partir de um texto do próprio GL (06/08), quase palavra
+            por palavra. A ponte não é retórica: o menino que achava que não se
+            encaixava É a leitora que acha que não seria selecionada. É a mesma
+            insegurança, e é por isso que ela funciona aqui — não porque
+            comove, mas porque explica por que esta consultoria não exige que
+            ninguém se encaixe em nada.
+          */}
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+            Eu fui o menino que tinha medo. Que se sentia estranho, que achava que
+            não se encaixava.
           </p>
-          <p style={{ ...TYPE.body, color: C.textSub, marginTop: SP[16] }}>
-            Trabalho com quem tem rotina difícil e pouca paciência para método que
-            só funciona em condição ideal. Se para você o problema nunca foi saber
-            o que fazer, e sim sustentar — é exatamente esse o meu trabalho.
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+            Demorei para entender que aquilo não era fraqueza. Era fase, era
+            construção — e ninguém me disse isso na época.
+          </p>
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.textRead, marginTop: SP[16] }}>
+            É por isso que aqui você não precisa se encaixar em nada. Nem em dieta
+            impossível, nem em rotina de atleta, nem num padrão que outra pessoa
+            inventou. Você não precisa ser a mais disciplinada do mundo — precisa
+            ser comprometida com o seu próprio processo.
+          </p>
+          <p style={{ ...TYPE.body, fontSize: 17, lineHeight: 1.7, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
+            O meu trabalho é ficar do seu lado enquanto isso acontece.
           </p>
         </div>
       </div>
