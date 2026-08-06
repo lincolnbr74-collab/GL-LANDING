@@ -37,11 +37,11 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
  * 2. SEM ROSTO. Todas as imagens foram recortadas acima dos ombros quando
  *    havia rosto identificável. Prova não precisa expor ninguém.
  *
- * O QUE SAIU: a foto de palco do Léo. Troféu e palco diziam "isto é para
- * atleta" bem no meio da seção que existe para acolher quem nunca manteve
- * rotina. Ele continua na página — como frase, no fim da seção, porque a
- * história dele é verdadeira e mostra até onde o método vai quando o objetivo
- * é esse. O que não pode é a imagem virar régua.
+ * O QUE SAIU: o Léo, INTEIRO. Primeiro a foto de palco — troféu e palco diziam
+ * "isto é para atleta" bem no meio da seção que existe para acolher quem nunca
+ * manteve rotina. Sobrou uma frase no fim da seção, e em 06/08 o GL mandou
+ * tirar essa também: sozinha ela lia como resto de construção, e carregava a
+ * mesma régua que a foto carregava. O texto está no histórico do git.
  *
  * Não há TEMPO em nenhum card: o GL não lembrava os prazos, e prazo inventado
  * é o tipo de número que ninguém confere e que quebra tudo se for descoberto.
@@ -253,9 +253,10 @@ function Hero({ onComecar }) {
 
    O título é a tese do GL, nas palavras dele: "corpo forte, bonito e
    funcional SEM TERRORISMO". Ela nomeia o inimigo (a restrição como régua)
-   sem atacar ninguém — e as três histórias são a mesma tese em três
-   contextos: uma venceu o medo de comer, outra venceu a rotina impossível,
-   o terceiro foi até o palco porque quis.
+   sem atacar ninguém — e as histórias são a mesma tese em contextos
+   diferentes: uma venceu o medo de comer, outra venceu a rotina impossível.
+   (Havia uma terceira, do Léo indo ao palco; saiu em 06/08 — ver o cabeçalho
+   de PARES.)
 
    Seção QUIETA de propósito: a dobra 1 tem movimento de entrada e o ticker
    rolando. Animação aqui também cansaria. O ritmo é alternar — é o melhor
@@ -348,16 +349,11 @@ function Prova({ onComecar }) {
         </span>
       </div>
 
-      {/* O Léo fecha a seção em TEXTO. A história é real e mostra o alcance do
-          método; a foto de palco é que não podia ficar no meio das outras. */}
-      <p style={{
-        ...TYPE.body, color: C.textSub, marginTop: SP[48], maxWidth: 640,
-        paddingLeft: SP[16], borderLeft: `2px solid ${C.red}`,
-      }}>
-        E quando o objetivo é o palco, o método vai até lá: o <strong style={{ color: C.text, fontWeight: 600 }}>Léo</strong> procurou
-        a consultoria querendo competir e virou bicampeão overall do Men&rsquo;s Physique.
-        O objetivo era dele — o acompanhamento é o mesmo.
-      </p>
+      {/* O LÉO SAIU INTEIRO (06/08, decisão do GL). A foto de palco já tinha
+          saído por dizer "isto é para atleta" no meio da seção que existe para
+          acolher quem nunca manteve rotina; a frase sobrevivente carregava o
+          mesmo peso e ficou lendo como resto de construção. Não reabrir sem ele
+          pedir — o texto está no histórico do git se um dia voltar. */}
     </section>
   );
 }
