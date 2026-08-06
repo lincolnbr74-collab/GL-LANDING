@@ -127,7 +127,10 @@ Oito imagens, todas com alt, nenhuma quebrada, lazy nas de baixo.
 
 1. **Revisão do GL** — principalmente os textos das duas histórias e o da seção
    "quem é o Gabriel", que foram escritos por mim a partir do que ele contou.
-2. **CREF** — o GL ia passar o número; não entrou em lugar nenhum ainda.
+2. ~~CREF~~ — **adiado pelo GL em 06/08**: a documentação dele só fica pronta na
+   semana seguinte. **Não bloqueia nada.** Não há placeholder nem lacuna na
+   página; a seção "quem é o Gabriel" fecha sem o número, e ele entra depois
+   como uma linha. Marcador do que não existe tem o hábito de ir para o ar.
 3. **Tempo de cada aluna**, se ele lembrar. Entra como uma linha em cada card.
 4. **Publicar:** `git checkout main && git merge pagina-comercial && git push`.
    **NÃO foi feito de propósito** — a `main` é o que a Vercel serve para o link
