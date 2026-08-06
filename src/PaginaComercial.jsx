@@ -48,13 +48,25 @@ import { C, TYPE, SP, BR, GLOBAL_CSS, CSS_COMERCIAL } from "./design";
  */
 export const PARES = [
   {
-    img: "/prova/maria-eduarda.webp",
-    nome: "Maria Eduarda",
+    img: "/prova/aluna-cortina.webp",
+    // NOME REMOVIDO em 06/08 — este card dizia "Maria Eduarda" e NÃO é ela.
+    // O GL apontou o quarto card e disse "essa é a Maria Eduarda"; conferido
+    // foto a foto, são quatro ensaios de quatro pessoas diferentes, e a desta
+    // aqui (biquíni verde e amarelo, fundo de cortina) não é a mesma do card
+    // que ele apontou. Nome de pessoa real em cima do corpo de outra pessoa
+    // real, numa página pública, não tem desfazer — então ele sai até o GL
+    // dizer de quem é a foto. O arquivo foi renomeado pelo mesmo motivo:
+    // `maria-eduarda.webp` afirmava a identidade errada no próprio nome.
+    nome: "Aluna GL",
     // Proporção do arquivo (1080x1050). Antes eu tinha cortado 14% do topo
     // "por segurança" e o quadrado do card comeu o resto — a foto aparecia do
     // quadril para baixo. O original não tem rosto: ela está de costas para a
     // câmera nos dois lados. Corte desnecessário, desfeito.
     proporcao: "1080 / 1050",
+    // A HISTÓRIA FICOU, mas o dono dela está em aberto: ela pode ter sido
+    // contada sobre a Maria Eduarda e colada na foto errada junto com o nome.
+    // Sem nome no card, ela não atribui nada a ninguém identificável — que é o
+    // estado seguro enquanto o GL não confirma.
     chamada: "A rotina nunca deixava treinar",
     historia:
       "Engordou, e o trabalho não tem horário. Não arrumamos a rotina dela: montamos uma dieta que cabe nela, com refeição que dá prazer. A consistência veio depois disso, não antes.",
@@ -89,7 +101,10 @@ export const PARES = [
   },
   {
     img: "/prova/aluna-perfil.webp",
-    nome: "Aluna GL",
+    // É ELA, confirmado pelo GL em 06/08 apontando este card: "essa é a Maria
+    // Eduarda". Sem história ainda — card com foto e nome é honesto; frase
+    // inventada sobre pessoa real, não.
+    nome: "Maria Eduarda",
     chamada: null,
     historia: null,
     // Proporção PRÓPRIA. O corte que tirou o rosto deixou a foto larga
