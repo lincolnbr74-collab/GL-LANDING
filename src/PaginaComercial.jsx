@@ -73,7 +73,7 @@ export const PARES = [
     // é justamente o que não pode estar errado numa página de prova.
     chamada: "Já tinha emagrecido. Achava que teria que comer menos ainda",
     historia:
-      "Foi obesa na adolescência e já tinha emagrecido quando me procurou. Queria condicionamento, firmeza de pele e músculo — mas chegou convencida de que o caminho era comer menos. Foi o contrário: comendo e treinando com acompanhamento, ela construiu o que a restrição não ia dar.",
+      "Foi obesa na adolescência e já tinha emagrecido quando me procurou. Queria condicionamento, firmeza de pele e músculo, mas chegou convencida de que o caminho era comer menos. Foi o contrário: comendo e treinando com acompanhamento, ela construiu o que a restrição não ia dar.",
     // Costas e perfil da MESMA avaliação. Ficam DENTRO do card de propósito:
     // numa faixa separada, o rótulo "a aluna acima" fica ambíguo com dois
     // cards em cima, e o leitor pode atribuir as fotos à pessoa errada.
@@ -81,7 +81,7 @@ export const PARES = [
       { img: "/prova/aluna-costas.webp", alt: "Isis, vista de costas" },
       { img: "/prova/aluna-lado.webp", alt: "Isis, vista de perfil" },
     ],
-    notaAngulos: "Costas e perfil da mesma avaliação — é assim que se vê que não foi enquadramento favorável.",
+    notaAngulos: "Costas e perfil da mesma avaliação. É assim que se vê que não foi enquadramento favorável.",
   },
   {
     // FOTO REFEITA DO ORIGINAL em 06/08. O GL abriu a página e disse: "a foto
@@ -121,7 +121,7 @@ export const PARES = [
         alt: "A mesma aluna, de corpo inteiro, antes e depois",
       },
     ],
-    notaAngulos: "A mesma aluna, de frente — antes e depois da mesma jornada.",
+    notaAngulos: "A mesma aluna, de frente, antes e depois da mesma jornada.",
   },
 {
     img: "/prova/aluna-cortina.webp",
@@ -152,7 +152,7 @@ export const PARES = [
     // não lembrava, e prazo inventado quebra tudo se for conferido.
     chamada: "Já treinava pesado. Faltava saber o que era dela",
     historia:
-      "Chegou avançada, com anos de treino e bastante massa muscular, mas seguindo o que servia para qualquer um — nunca o que o corpo dela pedia. Montei um protocolo direcionado para glúteo e posteriores de coxa. A diferença da foto é de um mês.",
+      "Chegou avançada, com anos de treino e bastante massa muscular, mas seguindo o que servia para qualquer um, nunca o que o corpo dela pedia. Montei um protocolo direcionado para glúteo e posteriores de coxa. A diferença da foto é de um mês.",
   },
   {
     img: "/prova/aluna-lateral.webp",
@@ -164,7 +164,7 @@ export const PARES = [
     // consultoria, contada por um caso em vez de por adjetivo.
     chamada: "Chegou querendo só uma ficha de treino",
     historia:
-      "Procurou a GL em março atrás de uma ficha, e saiu com treino e dieta montados para o caso dela: correção postural, posteriores de coxa e glúteo. Seguiu o protocolo sem sofrer na dieta — que é o que explica ela ter seguido até o fim.",
+      "Procurou a GL em março atrás de uma ficha, e saiu com treino e dieta montados para o caso dela: correção postural, posteriores de coxa e glúteo. Seguiu o protocolo sem sofrer na dieta, que é o que explica ela ter seguido até o fim.",
   },
 ];
 
@@ -255,7 +255,7 @@ function Hero({ onComecar }) {
         <p className="anim-sub" style={{
           ...TYPE.lead, color: C.textRead, marginTop: SP[24], maxWidth: 520,
         }}>
-          Não é falta de informação — você já ouviu de tudo. É que ninguém montou
+          Não é falta de informação. Você já ouviu de tudo. É que ninguém montou
           um plano para a <strong style={{ color: C.text, fontWeight: 600 }}>sua</strong> rotina
           e ficou por perto quando ela mudou.
         </p>
@@ -443,7 +443,7 @@ function Prova({ onComecar }) {
 const DORES = [
   {
     titulo: "Comecei e não mantive",
-    texto: "A consistência sempre foi o problema. O plano até existia — o que não existia era alguém percebendo quando ele parou de caber na sua semana.",
+    texto: "A consistência sempre foi o problema. O plano até existia. O que não existia era alguém percebendo quando ele parou de caber na sua semana.",
   },
   {
     titulo: "Me esforcei meses e não mudou quase nada",
@@ -517,7 +517,7 @@ const PASSOS = [
   {
     n: "01",
     titulo: "Anamnese antes de qualquer prescrição",
-    texto: "Rotina real, histórico, lesão, remédio, o que já deu errado — e o seu exame de sangue, quando você tem. Eu leio o laudo e o protocolo sai depois disso, não antes.",
+    texto: "Rotina real, histórico, lesão, remédio, o que já deu errado, e o seu exame de sangue, quando você tem. Eu leio o laudo e o protocolo sai depois disso, não antes.",
   },
   {
     n: "02",
@@ -544,12 +544,12 @@ const PASSOS = [
   {
     n: "04",
     titulo: "WhatsApp direto comigo",
-    texto: "Dúvida no meio do treino, cardápio de restaurante, plantão que virou a noite. Você fala comigo — não com atendente, não com grupo, não com robô.",
+    texto: "Dúvida no meio do treino, cardápio de restaurante, plantão que virou a noite. Você fala comigo, não com atendente, não com grupo, não com robô.",
   },
   {
     n: "05",
     titulo: "Correção de execução",
-    texto: "Você grava a série e eu assisto. Técnica errada é o que faz treinar muito e mudar pouco — e é o que machuca quem estava indo bem.",
+    texto: "Você grava a série e eu assisto. Técnica errada é o que faz treinar muito e mudar pouco. E é o que machuca quem estava indo bem.",
   },
   {
     n: "06",
@@ -559,7 +559,7 @@ const PASSOS = [
   {
     n: "07",
     titulo: "Check shape e plano novo todo mês",
-    texto: "Comparativo de evolução lado a lado, feedback do que mudou e treino e dieta atualizados. E, no meio do mês, se a sua vida virar: viagem, lesão, semana atípica. Ajuste faz parte do método — não é exceção nem recomeço.",
+    texto: "Comparativo de evolução lado a lado, feedback do que mudou e treino e dieta atualizados. E, no meio do mês, se a sua vida virar: viagem, lesão, semana atípica. Ajuste faz parte do método, não é exceção nem recomeço.",
   },
 ];
 
@@ -573,7 +573,7 @@ function Metodo() {
           </h2>
           <p style={{ ...TYPE.lead, color: C.textSub, marginTop: SP[16], maxWidth: 460 }}>
             Sem fórmula fechada e sem dieta de gaveta. Isto é o que você recebe,
-            item por item — e o que continua acontecendo depois da primeira
+            item por item, e o que continua acontecendo depois da primeira
             semana.
           </p>
           {/* A FOTO DO NOTEBOOK, pedida pelo GL em 06/08 para esta seção. Ela
@@ -802,7 +802,7 @@ function Quem() {
           </p>
           <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             Demorei para entender que aquilo não era fraqueza. Era fase, era
-            construção — e ninguém me disse isso na época.
+            construção, e ninguém me disse isso na época.
           </p>
           {/*
             CREDENCIAL, acrescentada em 06/08 com os dados do próprio GL.
@@ -832,13 +832,13 @@ function Quem() {
             países, e o que trava é quase sempre a mesma coisa: ninguém do lado.
           </p>
           <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
-            O fisiculturismo me ensinou o método. Não é o que eu vendo — quase
+            O fisiculturismo me ensinou o método. Não é o que eu vendo. Quase
             ninguém que eu atendo quer subir num palco.
           </p>
           <p style={{ ...TYPE.bodyRead, color: C.textRead, marginTop: SP[16] }}>
             É por isso que aqui você não precisa se encaixar em nada. Nem em dieta
             impossível, nem em rotina de atleta, nem num padrão que outra pessoa
-            inventou. Você não precisa ser a mais disciplinada do mundo — precisa
+            inventou. Você não precisa ser a mais disciplinada do mundo. Precisa
             ser comprometida com o seu próprio processo.
           </p>
           <p style={{ ...TYPE.bodyRead, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
@@ -872,7 +872,7 @@ function Entrada({ onComecar }) {
         certa.
       </p>
       <p style={{ ...TYPE.lead, color: C.text, marginTop: SP[16], fontWeight: 500 }}>
-        Se eu não for o caminho certo pra você, eu te digo — e te aponto o que eu faria no seu lugar.
+        Se eu não for o caminho certo pra você, eu te digo, e te aponto o que eu faria no seu lugar.
       </p>
       <div style={{ marginTop: SP[32], display: "flex", flexDirection: "column", alignItems: "center", gap: SP[12] }}>
         <button className="btn-primary" onClick={onComecar} style={{
