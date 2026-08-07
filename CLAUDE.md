@@ -205,6 +205,12 @@ identifica a mulher em qualquer busca.
   maior de propósito — é o único que não tem como quebrar promessa
 - **O quiz tem 7 perguntas** e a intro diz 7. Já disse 5 e foi corrigido antes
   de publicar
+- **Nenhum travessão em texto que o lead lê.** Pedido do GL em 07/08: travessão
+  em toda frase é a marca registrada de texto de IA. Foram 16 na comercial e 10
+  no quiz; viraram vírgula (quando a segunda parte completa a frase) ou ponto
+  (quando ela é uma frase inteira). Vale para as DUAS telas — o lead vê as duas
+  em sequência, e a incoerência entre elas é o que denuncia. Em comentário de
+  código pode: ninguém lê
 
 ### Armadilhas que já morderam aqui
 
