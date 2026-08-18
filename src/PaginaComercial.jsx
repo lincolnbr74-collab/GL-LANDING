@@ -183,6 +183,60 @@ export const PARES = [
 
 
 
+/**
+ * A PROVA DO PÚBLICO MASCULINO — modelo pronto, esperando conteúdo do GL.
+ *
+ * Criado em 17/08/2026, depois de ele apontar o buraco certo: *"a LP de homem
+ * não foi criada. Nem um modelo pra gente poder adicionar as histórias numa
+ * próxima seção?"*. Estava certo — esconder a dobra resolvia o problema de não
+ * mostrar aluna para homem, e não resolvia o de ter o que mostrar.
+ *
+ * **É só preencher aqui.** Nada mais precisa mudar no código: assim que este
+ * array deixar de estar vazio, a dobra passa a ser desenhada para quem escolheu
+ * "homem" na porta. Vazio, ela continua não aparecendo — página com seção vazia
+ * é pior que página sem a seção.
+ *
+ * COMO ACRESCENTAR UM ALUNO:
+ *
+ * 1. Ponha a imagem em `public/prova/`, em `.webp`, no MESMO formato das
+ *    outras: antes e depois lado a lado, na mesma foto.
+ * 2. Copie o bloco comentado abaixo, tire os comentários e preencha.
+ * 3. Confira o nome contra a foto ANTES de publicar. Este card já levou nome
+ *    trocado uma vez, e só apareceu porque o GL olhou a tela.
+ *
+ * REGRAS QUE VALEM AQUI, e não são formalidade:
+ *
+ * - **Nenhum rosto identificável.** Decisão fechada da página, para as duas
+ *   provas. Se a foto tiver rosto, corte no pescoço antes de converter.
+ * - **História inventada, nunca.** Card com foto e nome, sem história, é
+ *   honesto — já existe um assim na prova feminina. Frase escrita por alguém
+ *   que não é o aluno, sobre o corpo do aluno, não é depoimento: é ficção com
+ *   nome de pessoa real. Se não houver relato, deixe `chamada` e `historia`
+ *   fora e o card mostra só a foto e o nome.
+ * - **Dois ou quatro cards, não três.** A grade emparelha de dois em dois; três
+ *   deixa um buraco na segunda linha, que foi exatamente a reclamação do GL em
+ *   06/08 ("não pode ficar aquele vazio na landing page").
+ */
+export const PARES_M = [
+  // {
+  //   // Obrigatórios: a foto e o nome.
+  //   img: "/prova/aluno-nome.webp",
+  //   nome: "Primeiro nome",
+  //
+  //   // Opcionais, e só com relato REAL dele. Sem relato, apague as duas linhas.
+  //   chamada: "A frase curta que resume o ponto de partida",
+  //   historia:
+  //     "O parágrafo, com as palavras do GL sobre o caso: de onde ele saiu, o que estava errado no que ele tentava sozinho, e o que mudou o resultado.",
+  //
+  //   // Opcional: outros ângulos da MESMA avaliação, dentro do card dele.
+  //   // Soltos, seriam lidos como mais um aluno.
+  //   angulos: [
+  //     { img: "/prova/aluno-nome-costas.webp", alt: "Fulano, visto de costas" },
+  //   ],
+  //   notaAngulos: "O mesmo aluno, de frente, antes e depois da mesma jornada.",
+  // },
+];
+
 function Ticker() {
   const items = [
     "PROTOCOLO INDIVIDUAL", "CHECK-IN SEMANAL", "SUPORTE DIRETO", "RESULTADO REAL",
@@ -326,7 +380,12 @@ function Hero({ onComecar }) {
    rolando. Animação aqui também cansaria. O ritmo é alternar — é o melhor
    achado da nota "8 passos para tirar a cara de IA de um site".
 ───────────────────────────────────────── */
-function Prova({ onComecar }) {
+/**
+ * @param pares      lista de antes-e-depois a desenhar (feminina ou masculina)
+ * @param subtitulo  a linha sob o título — é a única cópia da dobra que muda
+ *                   com o público ("nenhuma delas" não serve para homem)
+ */
+function Prova({ onComecar, pares = PARES, subtitulo }) {
   return (
     <section style={{ maxWidth: 1180, margin: "0 auto", padding: `${SP[32]}px ${SP[24]}px ${SP[64]}px` }}>
       <h2 style={{ ...TYPE.displayLG, maxWidth: 760 }}>
@@ -334,11 +393,11 @@ function Prova({ onComecar }) {
         <span style={{ color: C.red }}> SEM TERRORISMO.</span>
       </h2>
       <p style={{ ...TYPE.lead, color: C.textSub, marginTop: SP[16], maxWidth: 620 }}>
-        Pontos de partida diferentes. Nenhuma delas passou fome para chegar aqui.
+        {subtitulo ?? "Pontos de partida diferentes. Nenhuma delas passou fome para chegar aqui."}
       </p>
 
       <div className="gl-prova-grade" style={{ marginTop: SP[48] }}>
-        {PARES.map((p) => (
+        {pares.map((p) => (
           <figure key={p.img} className="gl-prova-card" style={{ margin: 0 }}>
             {/* A foto vive DENTRO de uma caixa de altura fixa, contida e nunca
                 recortada (ver `.gl-foto-caixa` no design.js). É o que alinha os
@@ -910,9 +969,23 @@ function Entrada({ onComecar }) {
  * elas existirem, esta é a única linha que muda.
  */
 export default function PaginaComercial({ onComecar, publico = null }) {
-  // "n" (prefiro não informar) vê a prova que existe: esconder a dobra mais
-  // forte de quem não quis se classificar seria punir a discrição.
-  const mostrarProva = publico !== "m";
+  /**
+   * Qual prova desenhar, e quando não desenhar nenhuma.
+   *
+   * Homem recebe `PARES_M`; todo o resto recebe a prova feminina, que existe.
+   * "Prefiro não informar" vê a que existe de propósito — esconder a dobra mais
+   * forte de quem não quis se classificar seria punir a discrição.
+   *
+   * **A dobra some sozinha quando a lista está vazia**, e é isso que permite o
+   * modelo ficar publicado sem risco: enquanto o GL não puser um aluno em
+   * `PARES_M`, o público masculino segue vendo as outras cinco dobras. No dia
+   * em que ele puser o primeiro, ela aparece sem ninguém tocar em código.
+   */
+  const pares = publico === "m" ? PARES_M : PARES;
+  const subtitulo =
+    publico === "m"
+      ? "Pontos de partida diferentes. Nenhum deles passou fome para chegar aqui."
+      : undefined;
 
   return (
     <div style={{ minHeight: "100%", background: C.bg, color: C.text }}>
@@ -924,7 +997,7 @@ export default function PaginaComercial({ onComecar, publico = null }) {
       <style>{CSS_COMERCIAL}</style>
       <Ticker />
       <Hero onComecar={onComecar} />
-      {mostrarProva && <Prova onComecar={onComecar} />}
+      {pares.length > 0 && <Prova onComecar={onComecar} pares={pares} subtitulo={subtitulo} />}
       <Dores />
       <Metodo />
       <Quem />
