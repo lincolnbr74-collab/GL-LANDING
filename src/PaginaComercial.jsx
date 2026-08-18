@@ -890,7 +890,30 @@ function Entrada({ onComecar }) {
   );
 }
 
-export default function PaginaComercial({ onComecar }) {
+/**
+ * @param publico "f" | "m" | "n" | null — quem respondeu na porta (17/08/2026).
+ *
+ * Só UMA dobra depende do público, e é a Prova: as quatro histórias são de
+ * ALUNAS reais, com foto e relato que o GL entregou. As outras cinco (Hero,
+ * Dores, Método, Quem, Entrada) foram escritas em linguagem neutra desde o
+ * começo e servem aos dois sem uma palavra trocada — conferido linha a linha
+ * antes de mexer.
+ *
+ * > A PROVA NÃO É REESCRITA PARA HOMEM. Não existe antes-e-depois de aluno
+ * > homem neste repositório, e depoimento não se inventa: seria uma pessoa que
+ * > não existe dizendo um resultado que não aconteceu. Para o público
+ * > masculino a dobra simplesmente NÃO É DESENHADA, e a página segue com as
+ * > outras cinco.
+ *
+ * **O que falta é conteúdo, e é do GL:** fotos de antes e depois de alunos
+ * homens, com o relato de cada um, no mesmo formato do `PARES`. No dia em que
+ * elas existirem, esta é a única linha que muda.
+ */
+export default function PaginaComercial({ onComecar, publico = null }) {
+  // "n" (prefiro não informar) vê a prova que existe: esconder a dobra mais
+  // forte de quem não quis se classificar seria punir a discrição.
+  const mostrarProva = publico !== "m";
+
   return (
     <div style={{ minHeight: "100%", background: C.bg, color: C.text }}>
       {/* GLOBAL_CSS carrega as fontes (Anton/Inter/Mono), o grão e as
@@ -901,7 +924,7 @@ export default function PaginaComercial({ onComecar }) {
       <style>{CSS_COMERCIAL}</style>
       <Ticker />
       <Hero onComecar={onComecar} />
-      <Prova onComecar={onComecar} />
+      {mostrarProva && <Prova onComecar={onComecar} />}
       <Dores />
       <Metodo />
       <Quem />

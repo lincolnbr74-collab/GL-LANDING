@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { C, TYPE, SP, BR, GLOBAL_CSS } from "./design";
 
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwj_pWkJpYjsGpSsdSMBlDCIPzFUIFrqrwCI-68NGL893hibZB0oyfE0lsZsmZuXT1gMg/exec";
@@ -356,7 +356,15 @@ function IntroScreen({ screen, onNext }) {
   );
 }
 
-function GenderScreen({ onAnswer }) {
+/**
+ * A tela de genero, EXPORTADA para servir de porta antes da pagina comercial
+ * (pedido do GL, 17/08/2026).
+ *
+ * Ela e a MESMA tela nos dois lugares, de proposito. Copiar o desenho para uma
+ * "porta" nova daria duas telas que precisam ser mantidas iguais na mao, e a
+ * primeira divergencia seria invisivel: o visitante ve uma, o quiz usa a outra.
+ */
+export function GenderScreen({ onAnswer }) {
   const [sel, setSel] = useState(null);
   function choose(g) { setSel(g); setTimeout(()=>onAnswer("genero",g),320); }
   return (
@@ -587,21 +595,37 @@ const S = {
 /* ─────────────────────────────────────────
    APP PRINCIPAL
 ───────────────────────────────────────── */
-export default function GLQualificacao() {
+export default function GLQualificacao({ generoInicial = null }) {
   const [screenIdx,setScreenIdx]=useState(0);
-  const [answers,setAnswers]=useState({});
+  const [answers,setAnswers]=useState(generoInicial ? { genero: generoInicial } : {});
   const [animKey,setAnimKey]=useState(0);
 
-  const screen=SCREENS[screenIdx];
+  /**
+   * Quando o genero veio da porta, a tela dele SAI da lista em vez de ser
+   * pulada por indice. Pular por indice deixaria a tela viva e alcancavel pelo
+   * "voltar" -- e ai a pessoa responderia duas vezes a mesma pergunta, com a
+   * segunda resposta vencendo a escolha que definiu a pagina que ela acabou de
+   * ler.
+   *
+   * O CONTADOR NAO MUDA: `genero` nunca teve `step`, e a barra de progresso
+   * conta so as telas de tipo `choice` e `form`. As 7 perguntas continuam 7 --
+   * o que a intro promete continua verdade.
+   */
+  const TELAS = useMemo(
+    () => (generoInicial ? SCREENS.filter(s=>s.id!=="genero") : SCREENS),
+    [generoInicial],
+  );
+
+  const screen=TELAS[screenIdx];
   const genero=answers.genero||"n";
   const copy=COPY[genero];
 
-  const progressScreens=SCREENS.filter(s=>s.type==="choice"||s.type==="form");
+  const progressScreens=TELAS.filter(s=>s.type==="choice"||s.type==="form");
   const progressIdx=progressScreens.findIndex(s=>s.id===screen?.id);
   const showProgress=progressIdx>=0;
   const showTicker=screen.type==="intro";
 
-  function goNext(){ setAnimKey(k=>k+1); setScreenIdx(i=>Math.min(i+1,SCREENS.length-1)); window.scrollTo(0,0); }
+  function goNext(){ setAnimKey(k=>k+1); setScreenIdx(i=>Math.min(i+1,TELAS.length-1)); window.scrollTo(0,0); }
   function goBack(){ setAnimKey(k=>k+1); setScreenIdx(i=>Math.max(i-1,0)); window.scrollTo(0,0); }
 
   function handleAnswer(id,val){
