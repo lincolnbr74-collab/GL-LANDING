@@ -351,6 +351,7 @@ function IntroScreen({ screen, onNext }) {
         <div className="anim-cta" style={{display:"flex",flexDirection:"column",gap:SP[12],alignItems:"flex-start"}}>
           <BtnPrimary onClick={onNext}>{screen.cta} →</BtnPrimary>
           <span style={{...TYPE.monoSM,fontSize:10,color:C.textMuted,letterSpacing:"1px"}}>◦ {screen.note}</span>
+          <MiniChatWhatsApp/>
         </div>
       </div>
     </div>
@@ -426,7 +427,7 @@ function ChoiceScreen({ screen, answers, onAnswer, onNext, copy }) {
   );
 }
 
-function FormScreen({ screen, onSubmit, copy, objetivoId }) {
+function FormScreen({ screen, onSubmit, copy }) {
   const [nome,setNome]=useState("");
   const [whats,setWhats]=useState("");
   const [insta,setInsta]=useState("");
@@ -485,7 +486,6 @@ function FormScreen({ screen, onSubmit, copy, objetivoId }) {
             }
           </BtnPrimary>
           <p style={{...TYPE.monoSM,fontSize:10,color:C.textMuted,textAlign:"center",letterSpacing:"0.5px"}}>Sem spam. Dados usados apenas para contato.</p>
-          <MiniChatWhatsApp objetivoId={objetivoId}/>
         </div>
       </div>
     </div>
@@ -691,7 +691,7 @@ export default function GLQualificacao({ generoInicial = null }) {
         {screen.type==="intro"  && <IntroScreen screen={screen} onNext={goNext}/>}
         {screen.type==="gender" && <GenderScreen onAnswer={handleAnswer}/>}
         {screen.type==="choice" && <ChoiceScreen screen={screen} answers={answers} onAnswer={handleAnswer} onNext={goNext} copy={copy}/>}
-        {screen.type==="form"   && <FormScreen   screen={screen} onSubmit={handleSubmit} copy={copy} objetivoId={answers.objetivo}/>}
+        {screen.type==="form"   && <FormScreen   screen={screen} onSubmit={handleSubmit} copy={copy}/>}
         {screen.type==="confirm"&& <ConfirmScreen copy={copy}/>}
       </div>
     </>
