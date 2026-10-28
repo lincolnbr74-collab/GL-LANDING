@@ -194,7 +194,12 @@ identifica a mulher em qualquer busca.
 ### Decisões fechadas, não reabrir
 
 - A página **não fala preço**. Termina no quiz, que já pergunta sobre investimento
-- **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio
+- **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio.
+  **Exceção decidida pelo GL em 28/10/2026 ("só se desistir"):** o mini chat do WhatsApp
+  (`src/MiniChatWhatsApp.jsx`) aparece só para quem PARA no quiz (40 s sem tocar em nada
+  numa pergunta, ou o mouse saindo pelo topo da janela), uma vez por visita. Quem está
+  respondendo nunca o vê. A mensagem leva "Vim pelo site", que o GL SYSTEM usa para criar
+  o lead no CRM (`lib/zapiWebhook.ts`): não troque a frase sem trocar lá
 - **Nenhum rosto identificável** em foto de aluna
 - **O Léo saiu inteiro** — foto e texto. Troféu e palco diziam "isto é para
   atleta" no meio da seção que existe para acolher quem nunca manteve rotina
@@ -222,5 +227,10 @@ identifica a mulher em qualquer busca.
 - **A máquina não tem Pillow nem ImageMagick**, e o ffmpeg instalado **não tem
   encoder de webp**. Para webp use `cwebp`; para recortar, `ffmpeg`; para
   recolorir PNG, script Python puro (há um no histórico do git, commit `e6e6a07`)
+- **O build travou sem CPU nesta pasta (28/10/2026), duas vezes:** o `react-scripts build`
+  parou no começo com 0% de CPU e não saiu do lugar. Funcionou numa cópia fora do Desktop:
+  `rsync -a --exclude node_modules --exclude build --exclude .git` para outra pasta,
+  `npm ci` e `CI=true npx react-scripts build` lá. Suspeita, não provada: arquivo do
+  Desktop no iCloud sem cópia local
 - **Duas sessões no mesmo repositório ao mesmo tempo** aconteceu em 06/08 e
   quase custou trabalho. Antes de editar, `git log --oneline -3` e `git status`

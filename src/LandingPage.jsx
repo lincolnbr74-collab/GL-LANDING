@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { C, TYPE, SP, BR, GLOBAL_CSS } from "./design";
+import MiniChatWhatsApp from "./MiniChatWhatsApp";
 
 const WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbwj_pWkJpYjsGpSsdSMBlDCIPzFUIFrqrwCI-68NGL893hibZB0oyfE0lsZsmZuXT1gMg/exec";
 
@@ -692,6 +693,13 @@ export default function GLQualificacao({ generoInicial = null }) {
         {screen.type==="form"   && <FormScreen   screen={screen} onSubmit={handleSubmit} copy={copy}/>}
         {screen.type==="confirm"&& <ConfirmScreen copy={copy}/>}
       </div>
+
+      {/* Só nas perguntas e no formulário: quem PAROU ganha a saída pelo WhatsApp (28/10/2026). */}
+      <MiniChatWhatsApp
+        ativo={screen.type==="choice"||screen.type==="form"}
+        tela={screen.id}
+        objetivoId={answers.objetivo}
+      />
     </>
   );
 }
