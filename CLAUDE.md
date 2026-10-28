@@ -195,11 +195,13 @@ identifica a mulher em qualquer busca.
 
 - A página **não fala preço**. Termina no quiz, que já pergunta sobre investimento
 - **Um único destino de clique:** o quiz. Sem WhatsApp direto no meio.
-  **Exceção decidida pelo GL em 28/10/2026 ("só se desistir"):** o mini chat do WhatsApp
-  (`src/MiniChatWhatsApp.jsx`) aparece só para quem PARA no quiz (40 s sem tocar em nada
-  numa pergunta, ou o mouse saindo pelo topo da janela), uma vez por visita. Quem está
-  respondendo nunca o vê. A mensagem leva "Vim pelo site", que o GL SYSTEM usa para criar
-  o lead no CRM (`lib/zapiWebhook.ts`): não troque a frase sem trocar lá
+  **Exceção decidida pelo GL em 28/10/2026:** na tela do contato (passo 8, o formulário),
+  embaixo do botão, o link discreto "Prefere não preencher? Me chama no WhatsApp"
+  (`src/MiniChatWhatsApp.jsx`). As perguntas não têm saída nenhuma. No mesmo dia ele
+  reprovou a versão anterior, uma caixa que subia depois de 40 s parado ("quem vai fazer
+  isso?"): no celular, quem desiste fecha a página e nenhuma caixa alcança. A mensagem
+  leva "Vim pelo site", que o GL SYSTEM usa para criar o lead no CRM
+  (`lib/zapiWebhook.ts`): não troque a frase sem trocar lá
 - **Nenhum rosto identificável** em foto de aluna
 - **O Léo saiu inteiro** — foto e texto. Troféu e palco diziam "isto é para
   atleta" no meio da seção que existe para acolher quem nunca manteve rotina

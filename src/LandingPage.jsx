@@ -426,7 +426,7 @@ function ChoiceScreen({ screen, answers, onAnswer, onNext, copy }) {
   );
 }
 
-function FormScreen({ screen, onSubmit, copy }) {
+function FormScreen({ screen, onSubmit, copy, objetivoId }) {
   const [nome,setNome]=useState("");
   const [whats,setWhats]=useState("");
   const [insta,setInsta]=useState("");
@@ -485,6 +485,7 @@ function FormScreen({ screen, onSubmit, copy }) {
             }
           </BtnPrimary>
           <p style={{...TYPE.monoSM,fontSize:10,color:C.textMuted,textAlign:"center",letterSpacing:"0.5px"}}>Sem spam. Dados usados apenas para contato.</p>
+          <MiniChatWhatsApp objetivoId={objetivoId}/>
         </div>
       </div>
     </div>
@@ -690,16 +691,9 @@ export default function GLQualificacao({ generoInicial = null }) {
         {screen.type==="intro"  && <IntroScreen screen={screen} onNext={goNext}/>}
         {screen.type==="gender" && <GenderScreen onAnswer={handleAnswer}/>}
         {screen.type==="choice" && <ChoiceScreen screen={screen} answers={answers} onAnswer={handleAnswer} onNext={goNext} copy={copy}/>}
-        {screen.type==="form"   && <FormScreen   screen={screen} onSubmit={handleSubmit} copy={copy}/>}
+        {screen.type==="form"   && <FormScreen   screen={screen} onSubmit={handleSubmit} copy={copy} objetivoId={answers.objetivo}/>}
         {screen.type==="confirm"&& <ConfirmScreen copy={copy}/>}
       </div>
-
-      {/* Só nas perguntas e no formulário: quem PAROU ganha a saída pelo WhatsApp (28/10/2026). */}
-      <MiniChatWhatsApp
-        ativo={screen.type==="choice"||screen.type==="form"}
-        tela={screen.id}
-        objetivoId={answers.objetivo}
-      />
     </>
   );
 }
