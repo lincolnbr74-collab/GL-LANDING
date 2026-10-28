@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { C, BR } from "./design";
 
 /**
@@ -66,6 +66,11 @@ const CSS = `
 
 export default function MiniChatWhatsApp({ ativo, tela, objetivoId }) {
   const [aberto, setAberto] = useState(false);
+  const caixa = useRef(null);
+
+  // Quem volta a responder não pode achar a caixa por cima do "Continuar" (celular baixo,
+  // navegador do Instagram): ela sai na pergunta seguinte e no primeiro toque fora dela.
+  useEffect(() => { setAberto(false); }, [tela]);
 
   // O relógio recomeça a cada gesto e a cada pergunta nova: só conta quem PAROU.
   useEffect(() => {
@@ -87,8 +92,13 @@ export default function MiniChatWhatsApp({ ativo, tela, objetivoId }) {
   useEffect(() => {
     if (!aberto) return undefined;
     const esc = (e) => { if (e.key === "Escape") setAberto(false); };
+    const foraDela = (e) => { if (caixa.current && !caixa.current.contains(e.target)) setAberto(false); };
     window.addEventListener("keydown", esc);
-    return () => window.removeEventListener("keydown", esc);
+    document.addEventListener("pointerdown", foraDela);
+    return () => {
+      window.removeEventListener("keydown", esc);
+      document.removeEventListener("pointerdown", foraDela);
+    };
   }, [aberto]);
 
   if (!aberto || !ativo) return null;
@@ -100,7 +110,7 @@ export default function MiniChatWhatsApp({ ativo, tela, objetivoId }) {
   const link = `https://wa.me/${NUMERO}?text=${encodeURIComponent(texto)}`;
 
   return (
-    <aside className="gl-minichat" role="dialog" aria-modal="false" aria-labelledby="gl-minichat-titulo">
+    <aside ref={caixa} className="gl-minichat" role="dialog" aria-modal="false" aria-labelledby="gl-minichat-titulo">
       <style>{CSS}</style>
       <button type="button" className="gl-minichat-fechar" aria-label="Fechar" onClick={() => setAberto(false)}>
         <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
